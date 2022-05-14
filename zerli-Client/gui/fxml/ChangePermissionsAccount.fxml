@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fx:id="txtChooseAccount" layoutX="64.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose account you want to change:" wrappingWidth="249.33670043945312">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Label fx:id="lblChangePermission" layoutX="213.0" layoutY="47.0" prefHeight="54.0" prefWidth="352.0" text="Change Permissions Account Screen">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ActiveAccountComboBox" layoutX="415.0" layoutY="138.0" onAction="#ChooseAccount" prefHeight="25.0" prefWidth="249.0" promptText="LIst of Active Account" />
+      <Button fx:id="backBtn" layoutX="115.0" layoutY="385.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="71.0" text="Back">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="activeBtn" layoutX="222.0" layoutY="220.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="81.0" text="Active">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="freezeBtn" layoutX="444.0" layoutY="220.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="81.0" text="Freeze">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutBtn" layoutX="565.0" layoutY="385.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="82.0" text="Logout">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
