@@ -1,17 +1,21 @@
 package controlers;
-/**
- * Sample Skeleton for 'MainManagerScreen.fxml' Controller Class
- */
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+import controlers.AbstractController;
+import controlers.LoginScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
-public class MainManagerScreenController {
+
+public class MainManagerScreenController extends AbstractController implements  Initializable{
 
 
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -26,46 +30,35 @@ public class MainManagerScreenController {
     @FXML // fx:id="LabelWelcome"
     private Text LabelWelcome; // Value injected by FXMLLoader
 
-    @FXML // fx:id="ViewBranchReportsBtn"
-    private Button ViewBranchReportsBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="ViewStoreOrdersBtn"
-    private Button ViewStoreOrdersBtn; // Value injected by FXMLLoader
+    @FXML
+    private Button Revenuebtn;
 
     @FXML // fx:id="AddAccountBtn"
     private Button AddAccountBtn; // Value injected by FXMLLoader
 
-    @FXML // fx:id="ViewAuthorizedUsersBtn"
-    private Button ViewAuthorizedUsersBtn; // Value injected by FXMLLoader
-
     @FXML
     private Button LogOutBtn;
+    @FXML
+    private Label nameLabel;
     
-    @FXML
-    void ViewReports(ActionEvent event) {
-    	
-    }
-    @FXML
-    void ViewStoreOrder(ActionEvent event) {
-    	
-    }
-    @FXML
-    void AddAccount(ActionEvent event) {
-    	
-    }
-    @FXML
-    void ViewUsers(ActionEvent event) {
-    	
-    }
-    
-    @FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() {
-        assert Background != null : "fx:id=\"Backòround\" was not injected: check your FXML file 'MainManagerScreen.fxml'.";
-        assert LabelWelcome != null : "fx:id=\"LabelWelcome\" was not injected: check your FXML file 'MainManagerScreen.fxml'.";
-        assert ViewBranchReportsBtn != null : "fx:id=\"ViewBranchReportsBtn\" was not injected: check your FXML file 'MainManagerScreen.fxml'.";
-        assert ViewStoreOrdersBtn != null : "fx:id=\"ViewStoreOrdersBtn\" was not injected: check your FXML file 'MainManagerScreen.fxml'.";
-        assert AddAccountBtn != null : "fx:id=\"AddAccountBtn\" was not injected: check your FXML file 'MainManagerScreen.fxml'.";
-        assert ViewAuthorizedUsersBtn != null : "fx:id=\"ViewAuthorizedUsersBtn\" was not injected: check your FXML file 'MainManagerScreen.fxml'.";
 
+    @FXML
+    void AddAccount(ActionEvent event) throws IOException {
+    	start(event,"newAccountScreen","Open New Account",LoginScreenController.user.getFirstN());
     }
+    @FXML
+	void ViewStoreReports(ActionEvent event) throws IOException {
+		start(event,"ManagerViewReportsScreen","View Report",LoginScreenController.user.getFirstN());
+    }
+    
+	@Override
+	public void display(String string) {
+		nameLabel.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
+	}
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	}
