@@ -4,9 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Random;
-
 import Entities.Client;
+import Entities.Item_In_Catalog;
 
 public class Query {
 
@@ -116,7 +117,7 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
-					"INSERT INTO order.users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn) VALUES(?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO zerli_db.users (userName,password,Role,FirstName,LastName,ID,email,phone,isLoggedIn) VALUES(?,?,?,?,?,?,?,?,?)");
 					stmt2.setString(1, Account.getUserName());
 					stmt2.setString(2, Account.getPassword());
 					stmt2.setString(3, Account.getRole());
@@ -140,4 +141,37 @@ public class Query {
 			}
 		}
 	}
-}
+	
+	public static ArrayList<Item_In_Catalog> Initialize_products(String assembledItem) {
+		ArrayList<Item_In_Catalog> Catalog= new ArrayList<>();
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("SELECT * FROM zerli_db.item_in_catalog WHERE assembleItem =?");
+				stmt.setString(1, assembledItem);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					Item_In_Catalog Item = new Item_In_Catalog(rs.getInt("id"), rs.getString("color"),
+							rs.getString("name"), rs.getString("type"), rs.getFloat("price"),
+							rs.getString("assembleItem"));
+					Catalog.add(Item);
+				}
+				rs.close();
+			} else {
+				System.out.println("Conn is null");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Catalog;
+		}
+		
+		
+	}
+
+
+
+
+
+

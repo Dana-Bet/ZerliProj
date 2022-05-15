@@ -1,5 +1,8 @@
 package Parsing;
 
+import java.util.ArrayList;
+
+import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.MessageType;
 import Querys.Query;
@@ -27,6 +30,11 @@ public class ParsingServer {
 			LogicController.UpdateClientTable(msg, client);
 			return ( new Message(MessageType.Disconected, null));
 		} 
+		case Initialize_Catalog:{
+			String assembledProducts = (String) receivedMessage.getMessageData();
+			ArrayList<Item_In_Catalog> Catalog= Query.Initialize_products(assembledProducts);
+			return ( new Message(MessageType.Initialize_Catalog_succ, Catalog));
+		}
 		default:
 			break;
 		
