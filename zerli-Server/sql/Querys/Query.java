@@ -3,6 +3,10 @@ package Querys;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Random;
+
+import Entities.Client;
 
 public class Query {
 
@@ -81,5 +85,59 @@ public class Query {
 		}
 	}
 	
-	
+	//the method check if account exist
+	public static boolean IfAccountExist(Client Account) {
+		System.out.println("line 75 - query");
+		boolean flag = false;
+		 try {
+			if (DBConnect.conn != null) {
+		
+				Statement st = DBConnect.conn.createStatement();
+				String sql = "SELECT * FROM order.account";
+				ResultSet rs = st.executeQuery(sql);
+				while(rs.next()) {
+					String id_col = rs.getString("ID");
+					if(id_col.compareTo(Account.getId()) == 0) {
+							flag = true;
+							break;
+					}
+				}
+				
+		} else {
+			System.out.println("Conn is null");
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+
+		return flag;
+}
+	public static void addNewAccount(Client Account) {
+		if (DBConnect.conn != null) {
+			try {
+					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
+					"INSERT INTO order.users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn) VALUES(?,?,?,?,?,?,?,?,?)");
+					stmt2.setString(1, Account.getUserName());
+					stmt2.setString(2, Account.getPassword());
+					stmt2.setString(3, Account.getRole());
+					stmt2.setString(4, Account.getFirstN());
+					stmt2.setString(5, Account.getLastN());
+					stmt2.setString(6, Account.getId());
+					stmt2.setString(7, Account.getEmail());
+					stmt2.setString(8, Account.getPhone());
+					stmt2.setInt(9, 0); //The account insert in looggedId = 0
+					stmt2.executeUpdate();
+					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
+							"INSERT INTO client (client_id,status,CreditCardNumber) VALUES(?,?,?)");
+					stmt3.setString(1, Account.getId());
+					Random rand = new Random(); // instance of random class
+					int int_random = rand.nextInt(1000);
+					stmt3.setString(2, "Active");
+					stmt3.setString(3, Account.getCreditCardNumber());
+					stmt3.executeUpdate();
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+	}
 }
