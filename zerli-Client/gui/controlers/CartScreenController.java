@@ -30,9 +30,6 @@ public class CartScreenController extends AbstractController implements Initiali
     private Button confirmBtn;
 
     
- ///carttttttttttttt
-    
-    
     
     
     

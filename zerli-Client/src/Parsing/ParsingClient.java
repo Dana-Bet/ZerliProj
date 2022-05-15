@@ -23,7 +23,7 @@ public class ParsingClient {
 						LoginScreenController.user = null;
 					} else {
 						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
-								DivedMsg[4], DivedMsg[5], DivedMsg[6],DivedMsg[7]);
+								DivedMsg[4], DivedMsg[5], DivedMsg[6],DivedMsg[7],DivedMsg[8]);
 						LoginScreenController.statusUser = "Active";
 					}
 				}
