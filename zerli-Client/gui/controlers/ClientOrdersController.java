@@ -1,12 +1,14 @@
 package controlers;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class ClientOrdersController {
+public class ClientOrdersController extends AbstractController {
 
     @FXML
     private TableView<?> table;
@@ -39,8 +41,14 @@ public class ClientOrdersController {
     private Button backBtn;
 
     @FXML
-    void backMainPage(ActionEvent event) {
-
+    void backMainPage(ActionEvent event) throws IOException {
+    	start(event, "ClientMainPage", "Customer Screen", "");
     }
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="913.0" style="-fx-background-image: url('file:C:/Users/Dana/eclipse-workspace/zerli-Client/gui/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientOrdersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="913.0" style="-fx-background-image: url('file:C:/Users/Dana/git/ZerliProj/zerli-Client/gui/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientOrdersController">
    <children>
       <TableView fx:id="table" layoutX="32.0" layoutY="119.0" opacity="0.84" prefHeight="428.0" prefWidth="852.0">
          <columns>

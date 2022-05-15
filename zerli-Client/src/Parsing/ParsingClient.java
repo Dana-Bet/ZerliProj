@@ -1,13 +1,18 @@
 package Parsing;
 
+import java.util.ArrayList;
+
+import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.User;
+import controlers.ClientCatalogController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
 import controlers.ManagerViewReportsRevenueController;
 
 public class ParsingClient {
 
+	@SuppressWarnings("unchecked")
 	public static void Message(Object msg) {
 		// TODO Auto-generated method stub
 		Message receivedMessage = (Message) msg;
@@ -43,6 +48,11 @@ public class ParsingClient {
 		case ShowRevenueReport:{
 			ManagerViewReportsRevenueController.ViewReportsRevenueFlag = true;
 		}
+		case Initialize_Catalog_succ :{
+			ClientCatalogController.catalog_Initilaize = true;
+			ClientCatalogController.Catalog = (ArrayList<Item_In_Catalog>) (receivedMessage.getMessageData());
+		}
+		
 		default:{
 			break;
 		}

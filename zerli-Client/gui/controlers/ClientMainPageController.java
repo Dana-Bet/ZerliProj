@@ -39,7 +39,7 @@ public class ClientMainPageController extends AbstractController implements Init
     
     @FXML
 	public void OpenCreateOrdersPage(ActionEvent event) throws Exception {
-       //   start(event, "ClientCreateOrderScreen", "Create Order", user.getFirstN());
+          start(event, "ClientCreateOrderScreen", "Create Order", "");
 	}
 
 
@@ -52,7 +52,8 @@ public class ClientMainPageController extends AbstractController implements Init
 
     
     @FXML
-    void OpenOrdersTable(ActionEvent event) {
+    void OpenOrdersTable(ActionEvent event) throws IOException {
+    	 start(event, "ClientOrdersScreen", "my orders","");
     }
 
     @FXML
@@ -63,7 +64,7 @@ public class ClientMainPageController extends AbstractController implements Init
 
 	@Override
 	public void display(String string) {
-		HiUserLabel.setText("Hi "+string);
+		HiUserLabel.setText("Hi "+LoginScreenController.user.getUserName());
 			
 	}
 

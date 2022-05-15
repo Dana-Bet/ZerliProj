@@ -1,5 +1,7 @@
 package controlers;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 
-public class ClientAssemblyProductController {
+public class ClientAssemblyProductController extends AbstractController  { 
 
     @FXML
     private Button BridelBouquetBtn;
@@ -56,8 +58,8 @@ public class ClientAssemblyProductController {
     }
 
     @FXML
-    void Back(ActionEvent event) {
-
+    void Back(ActionEvent event) throws IOException {
+    	start(event, "ClientCreateOrderScreen", "Create Order", "");
     }
 
     @FXML
@@ -79,5 +81,11 @@ public class ClientAssemblyProductController {
     void showFlowerPotsScreen(ActionEvent event) {
 
     }
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

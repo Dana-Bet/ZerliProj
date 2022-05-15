@@ -81,7 +81,7 @@ import main.ClientUI;
 				if (user != null) {
 				  switch (user.getRole()) {
 					case "BranchManager": {
-						start(event, "BranchManagerScreen", "Branch Manager", user.getFirstN());
+						start(event, "MainManagerScreen", "Branch Manager", user.getFirstN());
 						break;
 					}
 

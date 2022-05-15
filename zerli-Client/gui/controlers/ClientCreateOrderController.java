@@ -1,10 +1,12 @@
 package controlers;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class ClientCreateOrderController {
+public class ClientCreateOrderController extends AbstractController  {
 
     @FXML 
     private Button OurCatalogBtn;
@@ -19,23 +21,29 @@ public class ClientCreateOrderController {
     private Button backBtn; 
 
     @FXML
-    void MakeYourOwnPage(ActionEvent event) {
-
+    void MakeYourOwnPage(ActionEvent event) throws IOException {
+    	start(event, "ClientMakeYourOwnProScreen", "Make Your Own Product screen", "");
     }
 
     @FXML
-    void OpenCartPage(ActionEvent event) {
-
+    void OpenCartPage(ActionEvent event) throws IOException {
+       start(event, "ClientCartScreen", "Cart Screen", "");
     }
 
     @FXML
-    void OpenCatalog(ActionEvent event) {
-
+    void OpenCatalog(ActionEvent event) throws IOException {
+       start(event, "ClientOurCatalogScreen", "Our Catalog ", "");
     }
 
     @FXML
-    void backToMain(ActionEvent event) {
-
+    void backToMain(ActionEvent event) throws IOException {
+       start(event, "ClientMainPage", "Customer Screen", "");
     }
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
