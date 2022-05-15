@@ -13,7 +13,7 @@ public class Query {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement(
-						"SELECT Role,ID,FirstName,LastName,userName,password,isLoggedIn,phone FROM zerli_db.users WHERE userName=? AND password=?");
+						"SELECT Role,ID,FirstName,LastName,userName,password,isLoggedIn,phone,email FROM zerli_db.users WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();
@@ -39,6 +39,8 @@ public class Query {
 					result.append(rs.getString(7));
 					result.append("@");
 					result.append(rs.getString(8));
+					result.append("@");
+					result.append(rs.getString(9));
 					System.out.println(result);
 				}
 				rs.close();

@@ -8,7 +8,7 @@ public class User implements Serializable {
 	private String userName, password, isLoggedIn, role, id, firstN, lastN, email,Phone;
 
 	public User(String role, String id, String firstN, String lastN, String userName,
-			String password, String isLoggedIn, String phone) {
+			String password, String isLoggedIn, String phone,String email) {
 		this.role = role;
 		this.id = id;
 		this.firstN = firstN;
@@ -17,6 +17,7 @@ public class User implements Serializable {
 		this.password = password;
 		this.isLoggedIn = isLoggedIn;
 		this.Phone = phone;
+		this.email =email;
 	}
 
 	public String getId() {
