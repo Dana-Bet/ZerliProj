@@ -116,7 +116,7 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
-					"INSERT INTO zerli_db.users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn) VALUES(?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO order.users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn) VALUES(?,?,?,?,?,?,?,?,?)");
 					stmt2.setString(1, Account.getUserName());
 					stmt2.setString(2, Account.getPassword());
 					stmt2.setString(3, Account.getRole());

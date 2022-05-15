@@ -3,6 +3,9 @@ package Parsing;
 import Entities.Message;
 import Entities.User;
 import controlers.LoginScreenController;
+import controlers.ManagerAddAccountController;
+import controlers.ManagerViewReportsRevenueController;
+
 public class ParsingClient {
 
 	public static void Message(Object msg) {
@@ -31,11 +34,15 @@ public class ParsingClient {
 				LoginScreenController.statusUser = "User name or password are inccorect";
 				LoginScreenController.user = null;
 			}
-			//IdentifyW4cController.client = null;
-			//break;
 		}
 		
-
+		case ConfirmOpenNewAccount: {
+			ManagerAddAccountController.ConfirmOpenNewAccountFlag = true;
+			break;
+		}
+		case ShowRevenueReport:{
+			ManagerViewReportsRevenueController.ViewReportsRevenueFlag = true;
+		}
 		default:{
 			break;
 		}
