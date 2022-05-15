@@ -93,7 +93,7 @@ public class Query {
 			if (DBConnect.conn != null) {
 		
 				Statement st = DBConnect.conn.createStatement();
-				String sql = "SELECT * FROM order.account";
+				String sql = "SELECT * FROM zerli_db.account";
 				ResultSet rs = st.executeQuery(sql);
 				while(rs.next()) {
 					String id_col = rs.getString("ID");
@@ -116,7 +116,7 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
-					"INSERT INTO order.users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn) VALUES(?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO zerli_db.users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn) VALUES(?,?,?,?,?,?,?,?,?)");
 					stmt2.setString(1, Account.getUserName());
 					stmt2.setString(2, Account.getPassword());
 					stmt2.setString(3, Account.getRole());
