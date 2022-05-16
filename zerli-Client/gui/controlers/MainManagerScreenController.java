@@ -48,7 +48,7 @@ public class MainManagerScreenController extends AbstractController implements  
     }
     @FXML
 	void ViewStoreReports(ActionEvent event) throws IOException {
-		start(event,"ManagerViewReportsScreen","View Report",LoginScreenController.user.getFirstN());
+		start(event,"ViewReportRevenue","View revenueReport",LoginScreenController.user.getFirstN());
     }
     
 	@Override
