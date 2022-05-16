@@ -6,6 +6,7 @@ import Entities.Client;
 import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.RevenueReport;
 import Querys.Query;
 import controllers.LogicController;
 import ocsf.server.ConnectionToClient;
@@ -41,6 +42,15 @@ public class ParsingServer {
 				Query.addNewAccount(Nclient);
 				return (new Message(MessageType.ConfirmOpenNewAccount, null));
 			}
+		case getYear:{
+			ArrayList<String> years = (ArrayList<String>) Query.getYear();
+			return (new Message(MessageType.getYear, years));
+		}
+		case getRevenueReports: {
+			RevenueReport report = (RevenueReport)receivedMessage.getMessageData();
+			ArrayList<RevenueReport> revenue = Query.getRevenueReports(report);
+			return (new Message(MessageType.RevenueReports_succ,revenue));
+		}
 		default:
 			break;
 		

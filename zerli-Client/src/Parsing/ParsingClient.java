@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Entities.Item_In_Catalog;
 import Entities.Message;
+import Entities.RevenueReport;
 import Entities.User;
 import controlers.ClientCatalogController;
 import controlers.LoginScreenController;
@@ -51,6 +52,14 @@ public class ParsingClient {
 		case Initialize_Catalog_succ :{
 			ClientCatalogController.catalog_Initilaize = true;
 			ClientCatalogController.Catalog = (ArrayList<Item_In_Catalog>) (receivedMessage.getMessageData());
+		}
+		case getYear: {
+			ManagerViewReportsRevenueController.years = (ArrayList<String>) receivedMessage.getMessageData();
+			break;
+		}
+		case RevenueReports_succ: {
+			ManagerViewReportsRevenueController.ViewReportsRevenueFlag = true;
+			ManagerViewReportsRevenueController.revenue = (ArrayList<RevenueReport>)(receivedMessage.getMessageData());	
 		}
 		
 		default:{

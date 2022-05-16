@@ -5,9 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Random;
 import Entities.Client;
 import Entities.Item_In_Catalog;
+import Entities.Order;
+import Entities.RevenueReport;
 
 public class Query {
 
@@ -167,8 +168,50 @@ public class Query {
 		}
 		return Catalog;
 		}
+	
+	//this method take the years in revenue_reports for DB
+		public static ArrayList<String> getYear() {
+			ArrayList<String> years = null;
+			Statement stmt;
+			try {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT DISTINCT year FROM zerli_db.revenue_reports");
+				years = new ArrayList<String>();
+				while (rs.next()) {
+				years.add(rs.getString(1));
+				}
+					rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			return years;
+		}
 		
-		
+		public static ArrayList<RevenueReport> getRevenueReports(RevenueReport report) {
+			ArrayList<RevenueReport> revenue = new ArrayList<>();
+			PreparedStatement stmt;
+			try {
+				if (DBConnect.conn != null) {
+					stmt = DBConnect.conn.prepareStatement("SELECT * FROM zeli_db.revenue_reports WHERE store =? AND month=? AND year=?");
+					stmt.setString(1, report.getStoreName());
+					stmt.setString(2, report.getMonth());
+					stmt.setString(3,report.getYear());
+					ResultSet rs = stmt.executeQuery();
+					while (rs.next()) {
+						RevenueReport report1 = new RevenueReport(rs.getString("store"),rs.getString("month"),rs.getString("year"),
+								rs.getString("orders_amount"),rs.getShort("income"),rs.getString("Quarterly"));
+						revenue.add(report1);
+					}
+					rs.close();
+				} else {
+					System.out.println("Conn is null");
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return revenue;
+		}
 	}
 
 

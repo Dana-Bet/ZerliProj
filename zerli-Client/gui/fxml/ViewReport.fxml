@@ -11,35 +11,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="101.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose store:">
+      <Text layoutX="102.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="102.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of report:">
+      <Text layoutX="82.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mouth:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="102.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="102.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mouth:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Text>
-      <ComboBox fx:id="chooseStoreComboBox" layoutX="264.0" layoutY="142.0" prefWidth="150.0" />
-      <ComboBox fx:id="typeReportComboBox" layoutX="264.0" layoutY="192.0" prefWidth="150.0" />
-      <ComboBox fx:id="yearComboBox" layoutX="264.0" layoutY="252.0" prefWidth="150.0" />
-      <ComboBox fx:id="mouthComboBox" layoutX="264.0" layoutY="316.0" prefWidth="150.0" />
-      <TableView layoutX="533.0" layoutY="152.0" prefHeight="200.0" prefWidth="328.0">
+      <ComboBox fx:id="yearComboBox" layoutX="179.0" layoutY="139.0" prefWidth="150.0" />
+      <ComboBox fx:id="mouthComboBox" layoutX="179.0" layoutY="214.0" prefWidth="150.0" />
+      <TableView layoutX="467.0" layoutY="133.0" prefHeight="283.0" prefWidth="394.0">
         <columns>
-          <TableColumn fx:id="tableColumnStore" prefWidth="103.99993896484375" text="Store" />
-          <TableColumn fx:id="tableColumnOrders" prefWidth="100.00006103515625" text="Orders" />
-            <TableColumn fx:id="tableColumnComplaint" prefWidth="121.59991455078125" text="Complaint" />
+          <TableColumn fx:id="tableColumnamount" prefWidth="103.99993896484375" text="orders_amount" />
+          <TableColumn fx:id="tableColumnincome" prefWidth="143.20001220703125" text="income" />
+            <TableColumn fx:id="tableColumnquarterly" prefWidth="146.39996337890625" text="Quarterly" />
         </columns>
       </TableView>
       <Button fx:id="showReportBtn" layoutX="275.0" layoutY="379.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="127.0" text="Show report">
@@ -47,17 +35,12 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="lblview" layoutX="339.0" layoutY="48.0" prefHeight="54.0" prefWidth="215.0" text="View Report">
+      <Label fx:id="lblview" layoutX="277.0" layoutY="42.0" prefHeight="54.0" prefWidth="380.0" text="View Revenue Report">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
       <Button fx:id="backBtn" layoutX="97.0" layoutY="510.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="71.0" text="back">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="logoutBtn" layoutX="742.0" layoutY="510.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="99.0" text="Logout">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

@@ -7,7 +7,7 @@ public enum MessageType {
 	
 	/*Client Message*/
 	Update_Orders,Show_Orders,Show_Catalog,userlogin,add_account,ShowRevenueReport,ConfirmOpenNewAccount,Initialize_Catalog,
-
+	getYear,getRevenueReports,RevenueReports_succ,
 	
 	/*Error*/
 	Error,

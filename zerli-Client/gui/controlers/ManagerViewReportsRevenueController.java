@@ -1,10 +1,16 @@
 package controlers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.Order;
+import Entities.RevenueReport;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,9 +28,6 @@ public class ManagerViewReportsRevenueController {
     private URL location;
 
     @FXML
-    private ComboBox<?> typeReportComboBox;
-
-    @FXML
     private ComboBox<String> yearComboBox;
 
     @FXML
@@ -38,33 +41,41 @@ public class ManagerViewReportsRevenueController {
 
     @FXML
     private Button backBtn;
+    @FXML
+    private TableColumn<RevenueReport, String> tableColumnamount;
+
+    @FXML
+    private TableColumn<RevenueReport, String> tableColumnincome;
+
+    @FXML
+    private TableColumn<RevenueReport, String> tableColumnquarterly;
+   
     
-    String month,year;
     public static boolean ViewReportsRevenueFlag = false;
-    @FXML
-    void Month(ActionEvent event) {
-    	month = monthComboBox.getValue();
-    }
-    @FXML
-    void Year(ActionEvent event) {
-    	year = yearComboBox.getValue();
-    }
+    private String[] month1 = {"1","2","3","4","5","6","7","8","9","10","11","12"};
+    public static ArrayList<RevenueReport> revenue= new ArrayList<>();
+
+	public static ArrayList<String> years;
+    
     @FXML
     void ShowRevenueReport(ActionEvent event) {
-    	StringBuilder str=new StringBuilder();
-    	str.append(month);
-    	str.append("@");
-    	str.append(year);
-    	Message msg = new Message(MessageType.ShowRevenueReport,str.toString());
-    	ClientUI.chat.accept(msg);
+    	ClientUI.chat.accept(new Message(MessageType.ShowRevenueReport,null));
+    	
     }
 
     @FXML
     void beck(ActionEvent event) {
 
     }
+ 
+    
     
 	public void initialize(URL location, ResourceBundle resources) {
 		ViewReportsRevenueFlag = true;	
+		ClientUI.chat.accept(new Message(MessageType.getYear,null));
+		ObservableList<String> observableList1 = FXCollections.observableArrayList(years);
+		yearComboBox.setItems(observableList1);
+		monthComboBox.getItems().addAll(month1);
+		
 	}
 }

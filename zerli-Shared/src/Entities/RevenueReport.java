@@ -6,13 +6,13 @@ public class RevenueReport implements Serializable {
 
 	private static final long serialVersionUID = 583542510006825068L;
 	private String month, year;
-	private int ordersamount;
+	private String ordersamount;
 	private float income;
 	private String storeName;
 	private String Quarterly;
 
-	public RevenueReport(String storeName, String month, String year, String Quarterly, int ordersamount,
-			float income) {
+	public RevenueReport(String storeName, String month, String year, String Quarterly, float income,
+			String ordersamount) {
 		this.month = month;
 		this.year = year;
 		this.ordersamount = ordersamount;
@@ -38,11 +38,11 @@ public class RevenueReport implements Serializable {
 		this.year = year;
 	}
 
-	public int getOrdersamount() {
+	public String getOrdersamount() {
 		return ordersamount;
 	}
 
-	public void setOrdersamount(int ordersamount) {
+	public void setOrdersamount(String ordersamount) {
 		this.ordersamount = ordersamount;
 	}
 
