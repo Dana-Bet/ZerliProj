@@ -2,6 +2,7 @@ package Parsing;
 
 import java.util.ArrayList;
 
+import Entities.Client;
 import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.MessageType;
@@ -35,6 +36,11 @@ public class ParsingServer {
 			ArrayList<Item_In_Catalog> Catalog= Query.Initialize_products(assembledProducts);
 			return ( new Message(MessageType.Initialize_Catalog_succ, Catalog));
 		}
+		case add_account: {
+			Client Nclient = (Client) receivedMessage.getMessageData();
+				Query.addNewAccount(Nclient);
+				return (new Message(MessageType.ConfirmOpenNewAccount, null));
+			}
 		default:
 			break;
 		

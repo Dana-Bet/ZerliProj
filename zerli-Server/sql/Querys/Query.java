@@ -46,7 +46,6 @@ public class Query {
 					result.append(rs.getString(8));
 					result.append("@");
 					result.append(rs.getString(9));
-					System.out.println(result);
 				}
 				rs.close();
 				if (result.length() == 0) {
@@ -130,11 +129,13 @@ public class Query {
 					stmt2.executeUpdate();
 					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
 							"INSERT INTO client (client_id,status,CreditCardNumber) VALUES(?,?,?)");
+					System.out.println("line 133");
 					stmt3.setString(1, Account.getId());
-					Random rand = new Random(); // instance of random class
-					int int_random = rand.nextInt(1000);
+					System.out.println("line 135");
 					stmt3.setString(2, "Active");
+					System.out.println("line 137");
 					stmt3.setString(3, Account.getCreditCardNumber());
+					System.out.println("line 139");
 					stmt3.executeUpdate();
 			} catch (SQLException s) {
 				s.printStackTrace();
