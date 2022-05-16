@@ -30,7 +30,7 @@
             <Font size="22.0" />
          </font>
       </Button>
-      <Label fx:id="updateLbl" layoutX="79.0" layoutY="410.0" prefHeight="20.0" prefWidth="300.0">
+      <Label fx:id="updateLbl" alignment="CENTER" layoutX="165.0" layoutY="415.0" prefHeight="20.0" prefWidth="300.0">
          <font>
             <Font size="14.0" />
          </font>

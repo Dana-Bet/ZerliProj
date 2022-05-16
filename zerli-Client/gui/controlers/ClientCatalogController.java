@@ -61,9 +61,12 @@ public class ClientCatalogController extends AbstractController implements Initi
     private Label productPriceLbl;
 
     @FXML
+    private Label productColorLbl;
+    
+    @FXML
     private ImageView productImage;
 
-
+    
     @FXML
     void AddProductToCart(ActionEvent event) {
 
@@ -102,21 +105,34 @@ public class ClientCatalogController extends AbstractController implements Initi
     	UpdateTypeProLabel.setText("Flower pots");
     }
     
+    
     @FXML
     void getItemDetails(ActionEvent event) {
-    	Item_In_Catalog item = null ;
-        String Choosing_Item = listOfProduct.getValue();
-        for (Item_In_Catalog i : Catalog) {
-        	if (i.getName().compareTo(Choosing_Item)==0){
-        		item = new Item_In_Catalog(i.getId(), i.getColor(), i.getName(),
-        				i.getType(), i.getPrice(), i.isAssembleItem());
-        		break;
+            productNameLbl.setText("");
+            productPriceLbl.setText("");
+            productColorLbl.setText("");
+            this.productImage.setImage(null);
+    	try {
+    	
+              String Choosing_Item = listOfProduct.getValue();
+              Item_In_Catalog item = null ;
+              for (Item_In_Catalog i : Catalog) {
+              	if (i.getName().compareTo(Choosing_Item)==0){
+         	     	item = new Item_In_Catalog(i.getId(), i.getColor(), i.getName(),
+        				   i.getType(), i.getPrice(), i.isAssembleItem());
+        		     break;
         	}
         }
-        productNameLbl.setText(item.getName());
-        productPriceLbl.setText((item.getPrice()).toString());
-        Image im= new Image("/images/"+item.getName()+".JPG");
-        this.productImage.setImage(im);
+     	
+       
+              productNameLbl.setText(item.getName());
+              productPriceLbl.setText("Price :"+(item.getPrice()).toString()+" $");
+              productColorLbl.setText("Dominant color : "+(item.getColor()).toString());
+              Image im= new Image("/images/"+item.getName()+".JPG");
+              this.productImage.setImage(im);
+        
+        
+             }catch(Exception e) {}
     }
     
     /*
@@ -124,6 +140,7 @@ public class ClientCatalogController extends AbstractController implements Initi
      */
     
     private void InitialPerType(String typeName) {
+    	listOfProduct.setValue("choose product from list");
     	listOfProduct.getItems().clear();
     	ArrayList<String> Items =  new ArrayList<String>();
     	for (Item_In_Catalog i : Catalog) {
@@ -143,7 +160,8 @@ public class ClientCatalogController extends AbstractController implements Initi
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ClientUI.chat.accept(new Message(MessageType.Initialize_Catalog,"0"));
-		//listOfProduct.setOnAction(this::getItemDetails);
+    	InitialPerType("Bridel bouquet");
+    	UpdateTypeProLabel.setText("Bridel bouquets");
 		
 	}
 
