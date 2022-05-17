@@ -50,8 +50,7 @@ public class ParsingClient {
 			ManagerViewReportsRevenueController.ViewReportsRevenueFlag = true;
 		}
 		case Initialize_Catalog_succ :{
-			ClientCatalogController.catalog_Initilaize = true;
-			ClientCatalogController.Catalog = (ArrayList<Item_In_Catalog>) (receivedMessage.getMessageData());
+			
 		}
 		case getYear: {
 			ManagerViewReportsRevenueController.years = (ArrayList<String>) receivedMessage.getMessageData();
