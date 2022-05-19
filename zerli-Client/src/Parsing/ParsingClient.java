@@ -4,12 +4,16 @@ import java.util.ArrayList;
 
 import Entities.Item_In_Catalog;
 import Entities.Message;
+import Entities.OrdersReport;
 import Entities.RevenueReport;
 import Entities.User;
 import controlers.ClientCatalogController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
+import controlers.ManagerFreezeController;
+import controlers.ManagerViewReportsOrders;
 import controlers.ManagerViewReportsRevenueController;
+import controlers.UpdateItemsInCatalogController;
 
 public class ParsingClient {
 
@@ -46,21 +50,43 @@ public class ParsingClient {
 			ManagerAddAccountController.ConfirmOpenNewAccountFlag = true;
 			break;
 		}
-		case ShowRevenueReport:{
-			ManagerViewReportsRevenueController.ViewReportsRevenueFlag = true;
-		}
 		case Initialize_Catalog_succ :{
-			
+			ClientCatalogController.catalog_Initilaize = true;
+			ClientCatalogController.Catalog = (ArrayList<Item_In_Catalog>) (receivedMessage.getMessageData());
 		}
 		case getYear: {
 			ManagerViewReportsRevenueController.years = (ArrayList<String>) receivedMessage.getMessageData();
 			break;
 		}
+		case getMonth: {
+			ManagerViewReportsRevenueController.months = (ArrayList<String>) receivedMessage.getMessageData();
+			break;
+		}
 		case RevenueReports_succ: {
 			ManagerViewReportsRevenueController.ViewReportsRevenueFlag = true;
-			ManagerViewReportsRevenueController.revenue = (ArrayList<RevenueReport>)(receivedMessage.getMessageData());	
+			ManagerViewReportsRevenueController.revenue = (ArrayList<RevenueReport>)(receivedMessage.getMessageData());
+			break;
 		}
-		
+		case getTypeProduct_succ: {
+			ManagerViewReportsOrders.productType = (ArrayList<String>)(receivedMessage.getMessageData());
+			break;
+		}
+		case getTypeProductOrders_succ: {
+			ManagerViewReportsOrders.productTypeOrders = (ArrayList<OrdersReport>)(receivedMessage.getMessageData());
+			break;
+		}
+		case getCustomerToFreeze_succ:{
+			ManagerFreezeController.customerList =  (ArrayList<String>)(receivedMessage.getMessageData());
+		}
+		case getHomwStore_succ:{
+			ManagerFreezeController.homeStoreList = (ArrayList<String>)(receivedMessage.getMessageData());
+		}
+		case getNamesitems_succ:{
+			UpdateItemsInCatalogController.NamesproductList = (ArrayList<String>)(receivedMessage.getMessageData());
+		}
+		case getTypeProductForCatalog_succ:{
+			UpdateItemsInCatalogController.productType1 = (ArrayList<String>)(receivedMessage.getMessageData());
+		}
 		default:{
 			break;
 		}

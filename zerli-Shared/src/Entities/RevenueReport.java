@@ -5,21 +5,29 @@ import java.io.Serializable;
 public class RevenueReport implements Serializable {
 
 	private static final long serialVersionUID = 583542510006825068L;
-	private String month, year;
+	private String month, year,id;
 	private String ordersamount;
-	private float income;
+	private String income;
 	private String storeName;
 	private String Quarterly;
 
-	public RevenueReport(String storeName, String month, String year, String Quarterly, float income,
-			String ordersamount) {
+	public RevenueReport(String storeName, String month, String year,String ordersamount, String income
+			,String Quarterly,String id) {
 		this.month = month;
 		this.year = year;
 		this.ordersamount = ordersamount;
 		this.income = income;
 		this.storeName = storeName;
 		this.Quarterly = Quarterly;
+		this.id = id;
+	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getMonth() {
@@ -46,11 +54,11 @@ public class RevenueReport implements Serializable {
 		this.ordersamount = ordersamount;
 	}
 
-	public float getIncome() {
+	public String getIncome() {
 		return income;
 	}
 
-	public void setIncome(float income) {
+	public void setIncome(String income) {
 		this.income = income;
 	}
 
@@ -71,8 +79,7 @@ public class RevenueReport implements Serializable {
 	}
 
 	public String toString() {
-		return "storeName = " + storeName + " month is= " + month + " year is: " + year
-				+ " Quarerly is : " + Quarterly + " ordersamount is " + ordersamount + " income is " + income;
+		return "storeName = " + storeName + " month is = " + month + " year is = " + year + " ordersamount is = " + ordersamount + " Quarerly is = " + Quarterly + " income is = " + income+ " id is = " + id;
 	}
 
 }

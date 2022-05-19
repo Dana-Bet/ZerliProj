@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Entities.Client;
 import Entities.Item_In_Catalog;
 import Entities.Order;
+import Entities.OrdersReport;
 import Entities.RevenueReport;
 
 public class Query {
@@ -19,7 +20,7 @@ public class Query {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement(
-						"SELECT Role,ID,FirstName,LastName,userName,password,isLoggedIn,phone,email FROM zerli_db.users WHERE userName=? AND password=?");
+						"SELECT Role,ID,FirstName,LastName,userName,password,isLoggedIn,phone,email,homeStore FROM zerli_db.users WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();
@@ -34,19 +35,21 @@ public class Query {
 					ID = rs.getString(2);
 					result.append(rs.getString(2));
 					result.append("@");
-					result.append(rs.getString(3));
+					result.append(rs.getString(3));//firstName
 					result.append("@");
-					result.append(rs.getString(4));
+					result.append(rs.getString(4));//lastName
 					result.append("@");
-					result.append(rs.getString(5));
+					result.append(rs.getString(5));//userName
 					result.append("@");
-					result.append(rs.getString(6));
+					result.append(rs.getString(6));//password
 					result.append("@");
-					result.append(rs.getString(7));
+					result.append(rs.getString(7));//isLoogin
 					result.append("@");
-					result.append(rs.getString(8));
+					result.append(rs.getString(8));//phone
 					result.append("@");
-					result.append(rs.getString(9));
+					result.append(rs.getString(9));//email
+					result.append("@");
+					result.append(rs.getString(10));//homeStore
 				}
 				rs.close();
 				if (result.length() == 0) {
@@ -130,13 +133,9 @@ public class Query {
 					stmt2.executeUpdate();
 					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
 							"INSERT INTO client (client_id,status,CreditCardNumber) VALUES(?,?,?)");
-					System.out.println("line 133");
 					stmt3.setString(1, Account.getId());
-					System.out.println("line 135");
 					stmt3.setString(2, "Active");
-					System.out.println("line 137");
 					stmt3.setString(3, Account.getCreditCardNumber());
-					System.out.println("line 139");
 					stmt3.executeUpdate();
 			} catch (SQLException s) {
 				s.printStackTrace();
@@ -186,21 +185,43 @@ public class Query {
 				}
 			return years;
 		}
+		//this method take the month in revenue_reports for DB
+		public static ArrayList<String> getMonth() {
+			ArrayList<String> month = null;
+			Statement stmt;
+			try {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT DISTINCT month FROM zerli_db.revenue_reports");
+				month = new ArrayList<String>();
+				while (rs.next()) {
+					month.add(rs.getString(1));
+				}
+					rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			return month;
+		}
 		
-		public static ArrayList<RevenueReport> getRevenueReports(RevenueReport report) {
+		public static ArrayList<RevenueReport> getRevenueReports(ArrayList<String> details) {
 			ArrayList<RevenueReport> revenue = new ArrayList<>();
 			PreparedStatement stmt;
 			try {
 				if (DBConnect.conn != null) {
-					stmt = DBConnect.conn.prepareStatement("SELECT * FROM zeli_db.revenue_reports WHERE store =? AND month=? AND year=?");
-					stmt.setString(1, report.getStoreName());
-					stmt.setString(2, report.getMonth());
-					stmt.setString(3,report.getYear());
+					stmt = DBConnect.conn.prepareStatement("SELECT * FROM zerli_db.revenue_reports WHERE id=? AND year=? AND month=?");
+					stmt.setString(1,details.get(0)); //id
+					stmt.setString(2, details.get(1)); //year
+					stmt.setString(3,details.get(2)); //month
 					ResultSet rs = stmt.executeQuery();
 					while (rs.next()) {
-						RevenueReport report1 = new RevenueReport(rs.getString("store"),rs.getString("month"),rs.getString("year"),
-								rs.getString("orders_amount"),rs.getShort("income"),rs.getString("Quarterly"));
-						revenue.add(report1);
+						String store = rs.getString("store");
+						String month = rs.getString("month");
+						String year = rs.getString("year");
+						String orders_amount = rs.getString("ordersamount");
+						String income = rs.getString("income");
+						String Quarterly = rs.getString("Quarterly");
+						String id = rs.getString("id");
+						revenue.add(new RevenueReport(store,month,year,orders_amount,income,Quarterly,id));
 					}
 					rs.close();
 				} else {
@@ -210,7 +231,152 @@ public class Query {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			
 			return revenue;
+		}
+
+		public static ArrayList<String> getProductType() {
+			ArrayList<String> types = new ArrayList<String>();
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT DISTINCT type FROM zerli_db.item_in_catalog");
+				
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+				types.add(rs.getString(1));
+				}
+					rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			return types;
+			
+		}
+
+		public static ArrayList<OrdersReport> getTypeOrders(String type1) {
+			ArrayList<OrdersReport> orders = new ArrayList<>();
+			PreparedStatement stmt;
+			try {
+				if (DBConnect.conn != null) {
+					stmt = DBConnect.conn.prepareStatement("SELECT * FROM zerli_db.orders_report WHERE type=?");
+					stmt.setString(1,type1); //id
+					ResultSet rs = stmt.executeQuery();
+					while (rs.next()) {
+						String month = rs.getString("month");
+						String year = rs.getString("year");
+						String store = rs.getString("store");
+						String Quantity = rs.getString("Quantity");
+						String type = rs.getString("type");
+						orders.add(new OrdersReport(store,month,year,Quantity,type));
+					}
+					rs.close();
+				} else {
+					System.out.println("Conn is null");
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return orders;
+		}
+
+		public static ArrayList<String> getCustomerToFreeze(String store) {
+			ArrayList<String> customerList = null;
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT DISTINCT id FROM zerli_db.users WHERE homeStore = ? AND Role = ?");
+				stmt.setString(1, store);
+				stmt.setString(2, "Customer");
+				ResultSet rs = stmt.executeQuery();
+				customerList = new ArrayList<String>();
+				while (rs.next()) {
+				customerList.add(rs.getString(1));
+				}
+					rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			System.out.println(customerList);
+			return customerList;
+		}
+
+		public static void FreezeCustomer(String customerToFreeze) {
+			PreparedStatement stmt;
+			try {
+		    	stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.client SET status='Freeze' WHERE client_id=?");
+		    	stmt.setString(1, customerToFreeze);
+			    stmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+
+		public static ArrayList<String> getstorelist() {
+			ArrayList<String> storelist = null;
+			Statement stmt;
+			try {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT DISTINCT homeStore FROM zerli_db.users");
+				storelist = new ArrayList<String>();
+				while (rs.next()) {
+					storelist.add(rs.getString(1));
+				}
+					rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			return storelist;
+		}
+
+		public static ArrayList<String> getNamesList(String type) {
+			ArrayList<String> names = null;
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT DISTINCT name FROM zerli_db.item_in_catalog WHERE type=?");
+				stmt.setString(1,type);
+				ResultSet rs = stmt.executeQuery();
+				names = new ArrayList<String>();
+				while (rs.next()) {
+				names.add(rs.getString(1));
+				}
+					rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			return names;
+		}
+
+		public static ArrayList<String> setDetailsInItem(ArrayList<String> details) {
+			PreparedStatement stmt;
+			try {
+		    	stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.users SET price=? WHERE type=? AND name=?");
+		    	stmt.setString(1,details.get(0));
+		    	stmt.setString(1,details.get(1));
+		    	stmt.setString(1,details.get(2));
+			    stmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		public static ArrayList<String> getProductType1() {
+			ArrayList<String> types = new ArrayList<String>();
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT DISTINCT type FROM zerli_db.item_in_catalog");
+				
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+				types.add(rs.getString(1));
+				}
+					rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			return types;			
 		}
 	}
 

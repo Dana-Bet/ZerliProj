@@ -35,22 +35,32 @@ public class MainManagerScreenController extends AbstractController implements  
 
     @FXML // fx:id="AddAccountBtn"
     private Button AddAccountBtn; // Value injected by FXMLLoader
-
+    @FXML
+    private Button oredersBtn;
     @FXML
     private Button LogOutBtn;
     @FXML
     private Label nameLabel;
-    
+    @FXML
+    private Button FreezeAccountBtn;
 
     @FXML
     void AddAccount(ActionEvent event) throws IOException {
     	start(event,"newAccountScreen","Open New Account",LoginScreenController.user.getFirstN());
     }
-    @FXML
-	void ViewStoreReports(ActionEvent event) throws IOException {
-		start(event,"ViewReportRevenue","View revenueReport",LoginScreenController.user.getFirstN());
+   
+    @FXML 
+    void ViewStoreReports(ActionEvent event) throws IOException {
+    	start(event,"ViewReportRevenue","View revenue Report","");
     }
-    
+    @FXML 
+    void ViewStoreReportsOrders(ActionEvent event) throws IOException {
+    	start(event,"ViewReportOrders","View Orders Report","");
+    }
+    @FXML
+    void FreezeAccount(ActionEvent event) throws IOException {
+    	start(event,"FreezeAccount","View Orders Report","");
+    }
 	@Override
 	public void display(String string) {
 		nameLabel.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());

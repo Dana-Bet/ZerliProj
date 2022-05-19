@@ -28,5 +28,15 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Button fx:id="oredersBtn" layoutX="159.0" layoutY="232.0" mnemonicParsing="false" onAction="#ViewStoreReportsOrders" prefHeight="47.0" prefWidth="239.0" text="View store report orders">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="FreezeAccountBtn" layoutX="158.0" layoutY="312.0" mnemonicParsing="false" onAction="#FreezeAccount" prefHeight="47.0" prefWidth="239.0" text="Freeze account">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

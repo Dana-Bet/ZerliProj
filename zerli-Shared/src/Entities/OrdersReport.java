@@ -7,16 +7,16 @@ public class OrdersReport implements Serializable {
 	private static final long serialVersionUID = 1983595595251314658L;
 	private String month, year;
 	private String store;
-	private String flowerType;
-	private int Quantity;
+	private String type;
+	private String quantity;
 
-	public OrdersReport(String month, String year, String store, String flowerType, int quantity) {
+	public OrdersReport(String month, String year, String store, String quantity, String type) {
 		super();
 		this.month = month;
 		this.year = year;
 		this.store = store;	
-		this.flowerType = flowerType;
-		Quantity = quantity;
+		this.quantity = quantity;
+		this.type = type;
 	}
 
 	public String getMonth() {
@@ -36,19 +36,19 @@ public class OrdersReport implements Serializable {
 	}
 
 	public String getFlowerType() {
-		return flowerType;
+		return type;
 	}
 
-	public void setFlowerType(String flowerType) {
-		this.flowerType = flowerType;
+	public void setFlowerType(String type) {
+		this.type = type;
 	}
 
-	public int getQuantity() {
-		return Quantity;
+	public String getQuantity() {
+		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
-		this.Quantity = quantity;
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getStore() {
@@ -60,8 +60,8 @@ public class OrdersReport implements Serializable {
 	}
 
 	public String toString() {
-		return " store is = " + store + " month is= " + month + " year is: " + year
-				+ " Quantity is : " + Quantity + " flowerType " + flowerType;
+		return " month is = " + month + " year is= " + year + " store is: " + store
+				+ " Quantity is : " + quantity + " type " + type;
 	}
 
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.MarketingWorkerController">
+   <children>
+      <Text layoutX="52.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HELLO" wrappingWidth="56.53675079345703">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Label fx:id="nameLbl" layoutX="120.0" layoutY="75.0" text="Label">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="updateCatalogBtn" layoutX="247.0" layoutY="165.0" mnemonicParsing="false" onAction="#updateCatalog" prefHeight="42.0" prefWidth="221.0" text="Update Items in catalog">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

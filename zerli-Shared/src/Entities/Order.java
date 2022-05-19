@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Order implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private int OrderNumber;
+	private int orderNumber;
 	private int price;
 	private String greetingCard;
 	private String color;
@@ -18,7 +18,7 @@ public class Order implements Serializable{
 	public Order(int OrderNumber,int price,String greetingCard,
 			String color,String dOrder,String shop,String date,String orderDate)
 	{
-		this.OrderNumber = OrderNumber;
+		this.orderNumber = OrderNumber;
 		this.price = price;
 		this.greetingCard =greetingCard;
 		this.color = color;
@@ -30,12 +30,12 @@ public class Order implements Serializable{
 	
 	public int getOrderNumber()
 	{
-		return OrderNumber;	
+		return orderNumber;	
 	}
 	
 	public void setOrderNumber(int ordernumber)
 	{
-		OrderNumber = ordernumber;
+		orderNumber = ordernumber;
 	}
 	
 	public int getPrice()

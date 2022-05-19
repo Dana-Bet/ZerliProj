@@ -18,7 +18,16 @@ public class User implements Serializable {
 		this.isLoggedIn = isLoggedIn;
 		this.Phone = phone;
 		this.email =email;
+		//this.homeStore = homeStore;
 	}
+
+//	public String getHomeStore() {
+//		return homeStore;
+//	}
+//
+//	public void setHomeStore(String homeStore) {
+//		this.homeStore = homeStore;
+//	}
 
 	public String getId() {
 		return id;
