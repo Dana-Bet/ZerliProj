@@ -7,6 +7,7 @@ import Entities.Message;
 import Entities.OrdersReport;
 import Entities.RevenueReport;
 import Entities.User;
+import controlers.ClientAssemblyProductController;
 import controlers.ClientCatalogController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
@@ -51,8 +52,16 @@ public class ParsingClient {
 			break;
 		}
 		case Initialize_Catalog_succ :{
-			ClientCatalogController.catalog_Initilaize = true;
-			ClientCatalogController.Catalog = (ArrayList<Item_In_Catalog>) (receivedMessage.getMessageData());
+			ArrayList<Item_In_Catalog> Catalog= new ArrayList<>();
+			Catalog = (ArrayList<Item_In_Catalog>) (receivedMessage.getMessageData());
+			if(Catalog.get(0).isAssembleItem().compareTo("0")==0) {
+				ClientCatalogController.Catalog=Catalog;
+				ClientCatalogController.catalog_Initilaize = true;
+			}
+			else {
+				ClientAssemblyProductController.Catalog=Catalog;
+				ClientAssemblyProductController.catalog_Initilaize = true;
+			}
 		}
 		case getYear: {
 			ManagerViewReportsRevenueController.years = (ArrayList<String>) receivedMessage.getMessageData();

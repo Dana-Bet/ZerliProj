@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.ToggleButtonGroup?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="653.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientAssemblyProductController">
@@ -20,7 +21,7 @@
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Label layoutX="43.0" layoutY="36.0" prefHeight="90.0" prefWidth="183.0" text="Zer-Li">
+            <Label layoutX="43.0" layoutY="36.0" prefHeight="90.0" prefWidth="183.0" text="Zer-Li" textFill="WHITE">
                <font>
                   <Font name="Yu Gothic UI Light" size="62.0" />
                </font>
@@ -32,31 +33,35 @@
       </AnchorPane>
       <AnchorPane layoutX="251.0" layoutY="8.0" opacity="0.85" prefHeight="653.0" prefWidth="689.0">
          <children>
-            <Button fx:id="PlusBtn" layoutX="67.0" layoutY="446.0" mnemonicParsing="false" onAction="#AddQuan" opacity="0.66" prefHeight="63.0" prefWidth="68.0" />
-            <Button layoutX="172.0" layoutY="446.0" mnemonicParsing="false" onAction="#DecQuan" opacity="0.66" prefHeight="63.0" prefWidth="61.0" />
-            <Label layoutX="82.0" layoutY="448.0" text="+">
+            <Button fx:id="PlusBtn" layoutX="67.0" layoutY="446.0" mnemonicParsing="false" onAction="#AddQuan" opacity="0.66" prefHeight="63.0" prefWidth="68.0">
+               <graphic>
+                  <Label text="+">
+                     <font>
+                        <Font name="Tw Cen MT Condensed Bold" size="57.0" />
+                     </font>
+                  </Label>
+               </graphic></Button>
+            <Button layoutX="165.0" layoutY="446.0" mnemonicParsing="false" onAction="#DecQuan" opacity="0.66" prefHeight="71.0" prefWidth="68.0">
+               <graphic>
+                  <Label alignment="CENTER" contentDisplay="TOP" prefHeight="70.0" prefWidth="55.0" text="--" textAlignment="CENTER">
+                     <font>
+                        <Font name="Aharoni Bold" size="44.0" />
+                     </font>
+                  </Label>
+               </graphic></Button>
+            <Label fx:id="QuanLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="380.0" opacity="0.79" prefHeight="64.0" prefWidth="49.0" text="0">
                <font>
-                  <Font name="Tw Cen MT Condensed Bold" size="57.0" />
+                  <Font size="43.0" />
                </font>
             </Label>
-            <Label layoutX="184.0" layoutY="408.0" prefHeight="63.0" prefWidth="29.0" text="_">
-               <font>
-                  <Font name="Tw Cen MT Condensed Bold" size="74.0" />
-               </font>
-            </Label>
-            <Label fx:id="QuanLbl" layoutX="135.0" layoutY="357.0" prefHeight="11.0" prefWidth="28.0" text="0">
-               <font>
-                  <Font size="56.0" />
-               </font>
-            </Label>
-            <Label fx:id="TotalPriceLbl" alignment="CENTER" layoutX="355.0" layoutY="596.0" prefHeight="32.0" prefWidth="210.0" text="Total Price : 0 $">
+            <Label fx:id="TotalPriceLbl" alignment="CENTER" layoutX="284.0" layoutY="596.0" prefHeight="32.0" prefWidth="210.0" text="Total Price : 0 $">
                <font>
                   <Font name="Yu Gothic Light" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="AddToCartBtn" layoutX="77.0" layoutY="567.0" mnemonicParsing="false" onAction="#AddProductToCart" prefHeight="38.0" prefWidth="147.0" text="Add to cart">
+            <Button fx:id="AddToCartBtn" layoutX="520.0" layoutY="590.0" mnemonicParsing="false" onAction="#AddProductToCart" prefHeight="38.0" prefWidth="131.0" text="Add to cart">
                <font>
-                  <Font name="System Bold" size="17.0" />
+                  <Font size="14.0" />
                </font>
             </Button>
             <Label layoutX="281.0" layoutY="174.0" prefHeight="32.0" prefWidth="240.0" text="Catalog individual items :">
@@ -85,37 +90,50 @@
                   <Font name="Yu Gothic Light" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="281.0" layoutY="77.0" prefHeight="32.0" prefWidth="251.0" text="Choose type of product :">
+            <Label layoutX="281.0" layoutY="38.0" prefHeight="32.0" prefWidth="251.0" text="Choose type of product :">
                <font>
                   <Font name="Yu Gothic UI Semibold" size="19.0" />
                </font>
             </Label>
             <ChoiceBox fx:id="listOfProducts" layoutX="508.0" layoutY="178.0" onAction="#getItemDetails" prefHeight="25.0" prefWidth="147.0" />
-            <TextField fx:id="ProductComponent" layoutX="284.0" layoutY="444.0" prefHeight="139.0" prefWidth="368.0" />
-            <Label fx:id="priceByQuan" alignment="CENTER" layoutX="66.0" layoutY="520.0" prefHeight="32.0" prefWidth="167.0" text=" Price : 0 $">
+            <Label fx:id="priceByQuan" alignment="CENTER" layoutX="67.0" layoutY="534.0" prefHeight="32.0" prefWidth="167.0" text=" Price : 0 $">
                <font>
                   <Font name="Yu Gothic Light" size="18.0" />
                </font>
             </Label>
-            <ToggleButtonGroup fx:id="BtnGroup" layoutX="282.0" layoutY="127.0" prefHeight="25.0" prefWidth="251.0">
-               <toggles>
-                  <RadioButton fx:id="Bouquet" mnemonicParsing="false" prefHeight="17.0" prefWidth="113.0" text="Bouquet">
+            <VBox layoutX="278.0" layoutY="71.0" prefHeight="45.0" prefWidth="306.0">
+               <children>
+                  <RadioButton fx:id="FlowerPot" mnemonicParsing="false" onAction="#getProductType" prefHeight="17.0" prefWidth="129.0" text="Flower pot">
+                     <font>
+                        <Font name="Yu Gothic UI Regular" size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="g1" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="Bouquet" mnemonicParsing="false" onAction="#getProductType" prefHeight="17.0" prefWidth="113.0" text="Bouquet" toggleGroup="$g1">
                      <font>
                         <Font name="Yu Gothic UI Regular" size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="Flowercluster" mnemonicParsing="false" prefHeight="17.0" prefWidth="131.0" text="Flowers cluster">
+                  <RadioButton fx:id="Flowercluster" mnemonicParsing="false" onAction="#getProductType" prefHeight="17.0" prefWidth="131.0" text="Flowers cluster" toggleGroup="$g1">
                      <font>
                         <Font name="Yu Gothic UI Regular" size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="FlowerPot" mnemonicParsing="false" prefHeight="17.0" prefWidth="129.0" text="Flower pot">
-                     <font>
-                        <Font name="Yu Gothic UI Regular" size="14.0" />
-                     </font>
-                  </RadioButton>
-               </toggles>
-            </ToggleButtonGroup>
+               </children>
+            </VBox>
+            <Label fx:id="updatelbl" layoutX="284.0" layoutY="148.0" prefHeight="19.0" prefWidth="348.0" textFill="#e81717">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="AddToProduct" layoutX="86.0" layoutY="590.0" mnemonicParsing="false" onAction="#AddToProduct" prefHeight="38.0" prefWidth="129.0" text="Add to product">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <TextArea fx:id="ProductComponent" layoutX="283.0" layoutY="425.0" prefHeight="157.0" prefWidth="368.0" />
          </children></AnchorPane>
    </children>
 </AnchorPane>
