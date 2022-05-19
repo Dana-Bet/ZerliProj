@@ -34,8 +34,14 @@ public class ParsingServer {
 		} 
 		case Initialize_Catalog:{
 			String assembledProducts = (String) receivedMessage.getMessageData();
-			ArrayList<Item_In_Catalog> Catalog= Query.Initialize_products(assembledProducts);
-			return ( new Message(MessageType.Initialize_Catalog_succ, Catalog));
+			if (assembledProducts == "0") {
+		         	ArrayList<Item_In_Catalog> Catalog= Query.Initialize_products(assembledProducts); // initial catalog of complete product
+		         	return ( new Message(MessageType.Initialize_Catalog_succ, Catalog));
+			}
+			else {
+				    ArrayList<Item_In_Catalog> Catalog= Query.Initialize_products(assembledProducts); //initial catalog for assemble product
+				    return ( new Message(MessageType.Initialize_Catalog_succ, Catalog));
+			}	
 		}
 		case add_account: {
 			Client Nclient = (Client) receivedMessage.getMessageData();
