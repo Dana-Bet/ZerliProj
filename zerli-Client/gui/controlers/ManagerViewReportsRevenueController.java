@@ -60,7 +60,7 @@ public class ManagerViewReportsRevenueController {
     @FXML
     void ShowRevenueReport(ActionEvent event) {
     	ClientUI.chat.accept(new Message(MessageType.ShowRevenueReport,null));
-    	
+    	//eara
     }
 
     @FXML
