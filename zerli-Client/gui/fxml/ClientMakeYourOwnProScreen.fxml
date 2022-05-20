@@ -103,7 +103,7 @@
             </Label>
             <VBox layoutX="278.0" layoutY="71.0" prefHeight="45.0" prefWidth="306.0">
                <children>
-                  <RadioButton fx:id="FlowerPot" mnemonicParsing="false" onAction="#getProductType" prefHeight="17.0" prefWidth="129.0" text="Flower pot">
+                  <RadioButton fx:id="FlowerPot" mnemonicParsing="false" onAction="#getProductType" prefHeight="17.0" prefWidth="129.0" text="Flower Pot">
                      <font>
                         <Font name="Yu Gothic UI Regular" size="14.0" />
                      </font>

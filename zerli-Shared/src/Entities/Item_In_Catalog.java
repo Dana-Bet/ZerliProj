@@ -2,15 +2,21 @@ package Entities;
 
 import java.io.Serializable;
 
-public class Item_In_Catalog implements Serializable{
+public class Item_In_Catalog implements Serializable {
 
 	public Item_In_Catalog(int id, String color, String name, String type, Float price, String assembleItem) {
-		super();
 		this.id = id;
 		this.color = color;
 		this.name = name;
 		this.type = type;
 		this.price = price;
+		this.assembleItem = assembleItem;
+	}
+	
+	public Item_In_Catalog(int id, String name, String type, String assembleItem) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
 		this.assembleItem = assembleItem;
 	}
 	
@@ -58,6 +64,21 @@ public class Item_In_Catalog implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	@Override
+	public String toString() {
+		return "\n" + this.getName() + "  "+this.getPrice().toString();
+	}
+
+	public boolean equals( Object Other) {
+		if (Other instanceof Item_In_Catalog) {
+			Item_In_Catalog temp= (Item_In_Catalog)Other;
+			if(this.getId()==temp.getId())
+				return true;
+		}
+		return false;
+	}
+	
 
 	
 }

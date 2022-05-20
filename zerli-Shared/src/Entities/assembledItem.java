@@ -1,46 +1,32 @@
 package Entities;
 
-public class assembledItem {
+public class assembledItem extends Item_In_Catalog{
         private int Quan;
-        private float Price;
-        private String Item_Name;
-
-        public assembledItem(String name) {
+    	private static final long serialVersionUID = 1L;
+    	
+        public assembledItem(int id ,String color, String name, String type, Float price, String assembleItem) {
+        	super(id ,color, name,type,price, assembleItem);
         	this.Quan=0;
-        	this.Price=0;
-        	this.Item_Name = name; 
-        
         }
         
         public void AddToQuan() {
-        	Quan++;
+        	Quan+=1;
         }
         public void DecToQuan() {
         	if(this.Quan>0) {
-        	   Quan--;
+        	   Quan-=1;
         	}
         }
-        public int getQuan() {
-        	return Quan;
+        public Integer getQuan() {
+        	return this.Quan;
         }
         
-        public float getPrice() {
-        	return Price;
-        }
-        
-        public void setPrice(float price) {
-        	this.Price = price;
-        }
-        
-        public String getName(){
-        	return Item_Name;
-        } 
-        public float getTotalPrice() {
-        	return this.Quan*this.Price;
+        public Float getTotalPrice() {
+        	return this.Quan*this.getPrice();
         }
         
         
         public String toString() {
-        	return  Quan + " " + Item_Name + " "+getTotalPrice()+ "$";
+        	return  Quan + " " +this.getName()+ " "+getTotalPrice()+ "$";
         }
 }

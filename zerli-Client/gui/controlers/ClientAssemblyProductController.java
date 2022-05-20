@@ -3,13 +3,12 @@ package controlers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-
 import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.assembledItem;
+import Entities.assembledProduct;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +17,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,15 +24,13 @@ import main.ClientUI;
 
 public class ClientAssemblyProductController extends AbstractController implements Initializable {
  
-
+    private assembledProduct AProduct;
 	public static boolean catalog_Initilaize = false ; 
 	public static ArrayList<Item_In_Catalog> Catalog= new ArrayList<>();
 	private RadioButton selectedRadioButton ;
 	private String TypeOfProduct;
-	//ArrayList<Item_In_Catalog> Order= new ArrayList<>();
-	private float sum ;
-	private Item_In_Catalog choosing_item;
-	List<assembledItem> assembledProductlist;
+	private assembledItem item;
+	private Item_In_Catalog choosing_Type;
 
 	
 
@@ -101,50 +97,22 @@ public class ClientAssemblyProductController extends AbstractController implemen
     
 	    
 	    void UpdateTextFiled() {
-	    	
-	    	if(assembledProductlist!=null) {
-                String inputText = ProductComponent.getText() + "\r\n" ; 
-                ProductComponent.clear();
-                int size = assembledProductlist.size();
-                ProductComponent.appendText(inputText + assembledProductlist.get(size-1).toString() );
-                this.sum+=assembledProductlist.get(size-1).getTotalPrice();    
-	         }
-              TotalPriceLbl.setText(Float.toString(sum));
+	    	ProductComponent.setText(AProduct.toString());
+	    	TotalPriceLbl.setText("Price : "+AProduct.getPrice().toString()+"$");
 	        }
 	    
 	    
 
 	    @FXML
 	    void AddQuan(ActionEvent event) {
-	    	int flag = 0;
-	    	if(assembledProductlist!=null) {
-	    	 for(assembledItem i : assembledProductlist) {
-	    		 if (i.getName().compareTo(choosing_item.getName())==0){
-	    			 i.AddToQuan();
-	    			 
-	    			 calc_and_update_labels( i.getQuan() ,i.getTotalPrice() );
-	    			 flag=1;
-	    		 }
-	    	 }
+	    	if (choosing_Type==null) {
+	    		updatelbl.setText("Please choose Product Type!");
+	    		return;
 	    	}
-	         if (flag==0) {
-	        	 assembledItem j = new assembledItem(choosing_item.getName());
-	        	 j.AddToQuan();
-	        	 j.setPrice(choosing_item.getPrice());
-	        	 
-    			 calc_and_update_labels( j.getQuan() ,j.getTotalPrice() );
-    			 
-				 assembledProductlist.add(j);
-	         } 
+	    	AProduct.addToProduct(this.item);
+	    	priceByQuan.setText("Price : "+AProduct.Product_components_map.get(item.getId()).getTotalPrice().toString()+"$");
+	    	QuanLbl.setText(AProduct.Product_components_map.get(item.getId()).getQuan().toString());
 	       }	 
-	    
-	    
-	    private void calc_and_update_labels (Integer q , Float t) {
-	    	
-	         QuanLbl.setText(q.toString());
-	         priceByQuan.setText("price :"+t.toString());
-	    	
-	    }
 	    
 
 	    @FXML
@@ -154,27 +122,33 @@ public class ClientAssemblyProductController extends AbstractController implemen
 
 	    @FXML
 	    void DecQuan(ActionEvent event) {
-	    	 for(assembledItem i : assembledProductlist) {
-	    		 if (i.getName().compareTo(choosing_item.getName())==0){
-	    			 i.DecToQuan();
-	    			 calc_and_update_labels( i.getQuan() ,i.getTotalPrice() );
-	    			 if(i.getQuan()==0) {
-	    				 assembledProductlist.remove(i);
-	    			 }
-	    			 
-	    		 }
-	    	 } 
-	      
+	    	if (choosing_Type==null) {
+	    		updatelbl.setText("Please choose Product Type!");
+	    		return;
+	    	}
+	    	AProduct.DecFromProduct(this.item);
+	    	if(AProduct.Product_components_map.containsKey(item.getId())) {
+	    	         priceByQuan.setText("Price : "+AProduct.Product_components_map.get(item.getId()).getTotalPrice().toString()+"$");
+	    	         QuanLbl.setText(AProduct.Product_components_map.get(item.getId()).getQuan().toString());
+	    }
+	    	else {
+		    	priceByQuan.setText("Price :");
+		    	QuanLbl.setText("0");
+	    	}
 	    }
 	    
 	    
 	    @FXML
 	    void AddToProduct(ActionEvent event) {
-	        QuanLbl.setText("");
-	        priceByQuan.setText("");
+	    	if(QuanLbl.getText().compareTo("0")==0)
+	    		return;
+	    	TotalPriceLbl.setText("Price : "+AProduct.getPrice().toString()+"$");
 	    	UpdateTextFiled();
+
+	    	
 	    }
 
+	    
 	    @FXML
 	    void getItemDetails(ActionEvent event) {
             productNameLbl.setText("");
@@ -186,35 +160,46 @@ public class ClientAssemblyProductController extends AbstractController implemen
               String Choosing_Item = listOfProducts.getValue();
               for (Item_In_Catalog i : Catalog) {
               	if (i.getName().compareTo(Choosing_Item)==0){
-              		choosing_item = new Item_In_Catalog(i.getId(), i.getColor(), i.getName(),
+              		 this.item = new assembledItem(i.getId(), i.getColor(), i.getName(),
         				   i.getType(), i.getPrice(), i.isAssembleItem());
         		     break;
         	}
         }
 	     	
-	              productNameLbl.setText(choosing_item.getName());
-	              productPriceLbl.setText("Price :"+(choosing_item.getPrice()).toString()+" $");
-	              productColorLbl.setText("Dominant color : "+(choosing_item.getColor()).toString());
-	              Image im= new Image("/images/"+choosing_item.getName()+".JPG");
+	              productNameLbl.setText(this.item.getName());
+	              productPriceLbl.setText("Price :"+(this.item.getPrice()).toString()+" $");
+	              productColorLbl.setText("Dominant color : "+(this.item.getColor()).toString());
+	              Image im= new Image("/images/"+this.item.getName()+".JPG");
 	              this.productImage.setImage(im);
 	        
 	             }catch(Exception e) {}
     	
 	    }
 	    
+	    
 	    @FXML
 	    void getProductType(ActionEvent event) {
+	    	this.AProduct=null;
+	    	ProductComponent.clear();
 	    	setSelection();
 			selectedRadioButton = (RadioButton) g1.getSelectedToggle();
 			TypeOfProduct = selectedRadioButton.getText();
+       
+            for (Item_In_Catalog i : Catalog) {
+            	if (i.getType().compareTo(TypeOfProduct)==0){
+            		this.choosing_Type = new Item_In_Catalog(i.getId(), i.getName(),
+      				   i.getType(), i.isAssembleItem());
+      		        break;
+      	        }
+	    }
+            this.AProduct = new assembledProduct(choosing_Type.getId(),choosing_Type.getName(),choosing_Type.getType(),choosing_Type.isAssembleItem());
 	    }
 	    
 	    private void setSelection() {
-	    	sum = 0; 
-	    	assembledProductlist.clear();
-	        QuanLbl.setText("");
-	        priceByQuan.setText("");
-	        ProductComponent.clear();
+	    	updatelbl.setText("");
+			this.TotalPriceLbl.setText("");
+	    	priceByQuan.setText("");
+	    	QuanLbl.setText("");
 	    }
 	     
     
@@ -227,35 +212,32 @@ public class ClientAssemblyProductController extends AbstractController implemen
     	@Override
     	public void initialize(URL arg0, ResourceBundle arg1) {
 			ClientUI.chat.accept(new Message(MessageType.Initialize_Catalog,"1"));
-			
-			this.sum = 0 ;
-			this.choosing_item = null;
-			this.assembledProductlist = new ArrayList<>();
-			
-			FlowerPot.setUserData("FlowerPot");
+			this.AProduct=null;
+			this.item = null;
+	    	
+
+			FlowerPot.setUserData("Flower Pot");
 			FlowerPot.setToggleGroup(g1);
-			FlowerPot.setSelected(false);
+		//	FlowerPot.setSelected(false);
 			Bouquet.setUserData("Bouquet");
 			Bouquet.setToggleGroup(g1);
-			Bouquet.setSelected(true);
+		//	Bouquet.setSelected(false);
 			Flowercluster.setUserData("Flower cluster");
 			Flowercluster.setToggleGroup(g1);
-			Flowercluster.setSelected(false);
-
-
-			selectedRadioButton = (RadioButton) g1.getSelectedToggle();
-			TypeOfProduct = selectedRadioButton.getText();
+		//	updatelbl.setText("Please choose Product Type!");
 			
 	    	listOfProducts.setValue("choose product from list");
 	    	listOfProducts.getItems().clear();
 	    	ArrayList<String> Items =  new ArrayList<String>();
 	    	for (Item_In_Catalog i : Catalog) {
+	    		if(i.getPrice()!=0) {
 	    			Items.add(i.getName());
 	    			System.out.println(i.getName());
 	    		}	
-	    	
+	    	}
 	    	listOfProducts.getItems().addAll(Items);
 	    	listOfProducts.setValue("eucalyptus branch");
+	    	
 		}
         	
 	}

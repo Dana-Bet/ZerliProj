@@ -2,6 +2,7 @@ package controlers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import Entities.ClientCart;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,6 +11,11 @@ import javafx.scene.control.TextArea;
 
 
 public class CartScreenController extends AbstractController implements Initializable {
+	public ClientCart cart;
+	
+	public CartScreenController() {
+		this.cart = new ClientCart();
+	}
 	
     @FXML
     private ResourceBundle resources;
@@ -45,5 +51,11 @@ public class CartScreenController extends AbstractController implements Initiali
 		
 	}
     
+	public boolean isEmpty() {
+		if (this.cart.Order_Components!=null) {
+			return false;
+		}
+		return true;
+	}
 
 }

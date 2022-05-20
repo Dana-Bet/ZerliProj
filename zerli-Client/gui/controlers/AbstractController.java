@@ -47,5 +47,19 @@ public abstract class AbstractController {
 		primaryStage.show();
 
 	}
+	
+	public void startPopUp(ActionEvent event, String fxmlName, String title, String toDisplay) throws IOException {
+		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
+		Parent root = load.load();
+		AbstractController aFrame = load.getController();
+		aFrame.display(toDisplay);
+		Scene scene = new Scene(root);
+		primaryStage.setTitle("Zer-li" + " " + title);
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		primaryStage.show();
+
+	}
 
 }
