@@ -1,14 +1,16 @@
 package controlers;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
-public class ClientCreateOrderController extends AbstractController  {
-	public CartScreenController cart ;
-	
+public class ClientCreateOrderController extends AbstractController   {;
+
+    @FXML
+    private ImageView cartImage;
     @FXML 
     private Button OurCatalogBtn;
 
@@ -18,6 +20,9 @@ public class ClientCreateOrderController extends AbstractController  {
     @FXML 
     private Button CartBtn; 
 
+    @FXML
+    private Label NumberOfProductLbl;
+    
     @FXML 
     private Button backBtn; 
 
@@ -44,7 +49,9 @@ public class ClientCreateOrderController extends AbstractController  {
 
 	@Override
 	public void display(String string) {
-		
+		CartBtn.setStyle("-fx-background-color: transparent;");
+		CartBtn.setGraphic(cartImage);
+		this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
 		
 	}
 

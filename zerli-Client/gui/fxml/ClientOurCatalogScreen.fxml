@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -45,23 +46,36 @@
       </AnchorPane>
       <AnchorPane layoutX="251.0" opacity="0.85" prefHeight="653.0" prefWidth="672.0">
          <children>
+            <Button fx:id="CartBtn" layoutX="543.0" layoutY="14.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="112.0">
+               <graphic>
+                  <ImageView fx:id="cartImage" fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@shopping-cart-png-icon-free-download-604195.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Label fx:id="UpdateTypeProLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="260.0" layoutY="104.0" prefHeight="32.0" prefWidth="328.0" text="Product type">
                <font>
                   <Font name="Yu Gothic Light" size="27.0" />
                </font>
             </Label>
-            <Button fx:id="PlusBtn" layoutX="67.0" layoutY="395.0" mnemonicParsing="false" onAction="#AddQuan" opacity="0.66" prefHeight="63.0" prefWidth="68.0" />
-            <Button layoutX="172.0" layoutY="395.0" mnemonicParsing="false" onAction="#DecQuan" opacity="0.66" prefHeight="63.0" prefWidth="61.0" />
-            <Label layoutX="82.0" layoutY="395.0" text="+">
-               <font>
-                  <Font name="Tw Cen MT Condensed Bold" size="57.0" />
-               </font>
-            </Label>
-            <Label layoutX="184.0" layoutY="355.0" prefHeight="63.0" prefWidth="29.0" text="_">
-               <font>
-                  <Font name="Tw Cen MT Condensed Bold" size="74.0" />
-               </font>
-            </Label>
+            <Button fx:id="PlusBtn" layoutX="67.0" layoutY="395.0" mnemonicParsing="false" onAction="#AddQuan" opacity="0.7" prefHeight="60.0" prefWidth="60.0">
+               <graphic>
+                  <ImageView disable="true" fitHeight="35.0" fitWidth="35.0">
+                     <image>
+                        <Image url="@../images/plusIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button layoutX="172.0" layoutY="395.0" mnemonicParsing="false" onAction="#DecQuan" opacity="0.7" prefHeight="60.0" prefWidth="60.0">
+               <graphic>
+                  <ImageView disable="true" fitHeight="35.0" fitWidth="35.0">
+                     <image>
+                        <Image url="@../images/minusIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Label fx:id="QuanLbl" layoutX="135.0" layoutY="304.0" prefHeight="11.0" prefWidth="28.0" text="0">
                <font>
                   <Font size="56.0" />
@@ -94,6 +108,7 @@
                   <Font name="Yu Gothic Light" size="21.0" />
                </font>
             </Label>
+            <Label fx:id="NumberOfProductLbl" layoutX="637.0" layoutY="52.0" textFill="#f80909" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

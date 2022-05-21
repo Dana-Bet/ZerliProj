@@ -2,7 +2,7 @@ package Entities;
 
 import java.io.Serializable;
 
-public class Item_In_Catalog implements Serializable {
+public class Item_In_Catalog implements Serializable { 
 
 	public Item_In_Catalog(int id, String color, String name, String type, Float price, String assembleItem) {
 		this.id = id;

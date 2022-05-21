@@ -10,10 +10,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import main.ClientUI;
 
+
 public class ClientMainPageController extends AbstractController implements Initializable {
-	
+
+    @FXML
+    private ImageView cartImage;
+    
     @FXML
     private Button CartBtn;
 
@@ -24,6 +29,9 @@ public class ClientMainPageController extends AbstractController implements Init
     private Button CreateOrderBtn;
 
     @FXML
+    private Label NumberOfProductLbl;
+    
+    @FXML
     private Button MyAccountBtn;
 
     @FXML
@@ -31,6 +39,7 @@ public class ClientMainPageController extends AbstractController implements Init
 
     @FXML
     private Button MyOrdersBtn;
+
 
     @FXML
 	public void OpenCartPage(ActionEvent event) throws Exception {
@@ -70,8 +79,9 @@ public class ClientMainPageController extends AbstractController implements Init
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
+		this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
+		CartBtn.setStyle("-fx-background-color: transparent;");
+		CartBtn.setGraphic(cartImage);
 	}
 	    
 	    

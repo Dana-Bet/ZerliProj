@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -16,7 +17,7 @@
    <children>
       <AnchorPane opacity="0.67" prefHeight="653.0" prefWidth="247.0" style="-fx-background-image: url('/images/back6.JPG');">
          <children>
-            <Button fx:id="BackBtn" layoutX="1.0" layoutY="608.0" mnemonicParsing="false" onAction="#Back" prefHeight="45.0" prefWidth="250.0" text="Back">
+            <Button fx:id="BackBtn" layoutX="3.0" layoutY="601.0" mnemonicParsing="false" onAction="#Back" prefHeight="45.0" prefWidth="250.0" text="Back">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -33,21 +34,21 @@
       </AnchorPane>
       <AnchorPane layoutX="251.0" layoutY="8.0" opacity="0.85" prefHeight="653.0" prefWidth="689.0">
          <children>
-            <Button fx:id="PlusBtn" layoutX="67.0" layoutY="446.0" mnemonicParsing="false" onAction="#AddQuan" opacity="0.66" prefHeight="63.0" prefWidth="68.0">
+            <Button fx:id="PlusBtn" layoutX="67.0" layoutY="446.0" mnemonicParsing="false" onAction="#AddQuan" opacity="0.7" prefHeight="60.0" prefWidth="60.0">
                <graphic>
-                  <Label text="+">
-                     <font>
-                        <Font name="Tw Cen MT Condensed Bold" size="57.0" />
-                     </font>
-                  </Label>
+                  <ImageView disable="true" fitHeight="35.0" fitWidth="35.0">
+                     <image>
+                        <Image url="@../images/plusIcon.png" />
+                     </image>
+                  </ImageView>
                </graphic></Button>
-            <Button layoutX="165.0" layoutY="446.0" mnemonicParsing="false" onAction="#DecQuan" opacity="0.66" prefHeight="71.0" prefWidth="68.0">
+            <Button layoutX="165.0" layoutY="446.0" mnemonicParsing="false" onAction="#DecQuan" opacity="0.7" prefHeight="60.0" prefWidth="60.0">
                <graphic>
-                  <Label alignment="CENTER" contentDisplay="TOP" prefHeight="70.0" prefWidth="55.0" text="--" textAlignment="CENTER">
-                     <font>
-                        <Font name="Aharoni Bold" size="44.0" />
-                     </font>
-                  </Label>
+                  <ImageView disable="true" fitHeight="35.0" fitWidth="35.0">
+                     <image>
+                        <Image url="@../images/minusIcon.png" />
+                     </image>
+                  </ImageView>
                </graphic></Button>
             <Label fx:id="QuanLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="380.0" opacity="0.79" prefHeight="64.0" prefWidth="49.0" text="0">
                <font>
@@ -123,17 +124,22 @@
                   </RadioButton>
                </children>
             </VBox>
-            <Label fx:id="updatelbl" layoutX="284.0" layoutY="148.0" prefHeight="19.0" prefWidth="348.0" textFill="#e81717">
+            <Label fx:id="updatelbl" layoutX="284.0" layoutY="148.0" prefHeight="19.0" prefWidth="348.0" textFill="#eb1818">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Button fx:id="AddToProduct" layoutX="86.0" layoutY="590.0" mnemonicParsing="false" onAction="#AddToProduct" prefHeight="38.0" prefWidth="129.0" text="Add to product">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
             <TextArea fx:id="ProductComponent" layoutX="283.0" layoutY="425.0" prefHeight="157.0" prefWidth="368.0" />
+            <Button fx:id="CartBtn" layoutX="568.0" layoutY="7.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="112.0">
+               <graphic>
+                  <ImageView fx:id="cartImage" fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@shopping-cart-png-icon-free-download-604195.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label fx:id="NumberOfProductLbl" layoutX="655.0" layoutY="42.0" prefHeight="25.0" prefWidth="15.0" textFill="#f80909" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

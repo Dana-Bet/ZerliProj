@@ -11,11 +11,8 @@ import javafx.scene.control.TextArea;
 
 
 public class CartScreenController extends AbstractController implements Initializable {
-	public ClientCart cart;
+	public static ClientCart cart;
 	
-	public CartScreenController() {
-		this.cart = new ClientCart();
-	}
 	
     @FXML
     private ResourceBundle resources;
@@ -41,21 +38,17 @@ public class CartScreenController extends AbstractController implements Initiali
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		AreaForOrders.setText(cart.toString());
 		
 	}
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+	
 	}
     
 	public boolean isEmpty() {
-		if (this.cart.Order_Components!=null) {
-			return false;
-		}
-		return true;
+		return cart.Order_Components.isEmpty();
 	}
 
 }

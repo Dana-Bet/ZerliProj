@@ -2,11 +2,13 @@ package Parsing;
 
 import java.util.ArrayList;
 
+import Entities.ClientCart;
 import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.OrdersReport;
 import Entities.RevenueReport;
 import Entities.User;
+import controlers.CartScreenController;
 import controlers.ClientAssemblyProductController;
 import controlers.ClientCatalogController;
 import controlers.LoginScreenController;
@@ -39,6 +41,7 @@ public class ParsingClient {
 						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 								DivedMsg[4], DivedMsg[5], DivedMsg[6],DivedMsg[7],DivedMsg[8]);
 						LoginScreenController.statusUser = "Active";
+						CartScreenController.cart = new ClientCart();
 					}
 				}
 			} else {

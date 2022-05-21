@@ -9,12 +9,14 @@
 
 <AnchorPane prefHeight="599.0" prefWidth="909.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientMainPageController">
    <children>
-      <Button fx:id="CartBtn" layoutX="779.0" layoutY="9.0" mnemonicParsing="false" onAction="#OpenCartPage" opacity="0.0" prefHeight="61.0" prefWidth="110.0" text="Button" />
-      <ImageView fitHeight="49.0" fitWidth="58.0" layoutX="801.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@shopping-cart-png-icon-free-download-604195.png" />
-         </image>
-      </ImageView>
+      <Button fx:id="CartBtn" layoutX="779.0" layoutY="9.0" mnemonicParsing="false" onAction="#OpenCartPage" prefHeight="61.0" prefWidth="110.0">
+         <graphic>
+            <ImageView fx:id="cartImage" fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@shopping-cart-png-icon-free-download-604195.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <Button fx:id="LogoutBtn" layoutX="767.0" layoutY="520.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="99.0" text="logout">
          <font>
             <Font name="Arial" size="21.0" />
@@ -40,5 +42,6 @@
             <Font name="Yu Gothic UI Light" size="25.0" />
          </font>
       </Button>
+      <Label fx:id="NumberOfProductLbl" layoutX="862.0" layoutY="49.0" prefHeight="21.0" prefWidth="18.0" textFill="#f80909" />
    </children>
 </AnchorPane>
