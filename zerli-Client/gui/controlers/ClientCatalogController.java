@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import Entities.ClientCart;
 import Entities.ItemInOrder;
 import Entities.Item_In_Catalog;
 import Entities.Message;
@@ -23,9 +25,17 @@ public class ClientCatalogController extends AbstractController implements Initi
     
 	public static boolean catalog_Initilaize = false ; 
 	public static ArrayList<Item_In_Catalog> Catalog= new ArrayList<>();
-	ItemInOrder tempItem;
+	Item_In_Catalog tempItem;
 	String TypeOfProduct;
+	private ClientCart cart;
+	int itemId;
 	
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+   
     @FXML
     public ChoiceBox<String> listOfProduct;
 
@@ -60,9 +70,6 @@ public class ClientCatalogController extends AbstractController implements Initi
     private Label TotalPriceLbl;
 
     @FXML
-    private Button AddToCartBtn;
-    
-    @FXML
     private Label productNameLbl;
     
     @FXML
@@ -77,46 +84,40 @@ public class ClientCatalogController extends AbstractController implements Initi
     @FXML
     private ImageView cartImage;
     
-    @FXML
-    void AddProductToCart(ActionEvent event) {
-    	TotalPriceLbl.setText("Price : ");
-    	QuanLbl.setText("0");
-    	CartScreenController.cart.AddToCart(new ItemInOrder(tempItem.getId(), tempItem.getColor(), tempItem.getName(),
-    			tempItem.getType(), tempItem.getPrice(), tempItem.isAssembleItem(),tempItem.getQuan()));
-		this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
-		ArrayList<String> s = new ArrayList<>();
-		s= CartScreenController.cart.Create_Recipt();
-		System.out.println(s);
-
-    }
-    
-    @FXML
-    void AddQuan(ActionEvent event) {
-    	tempItem.AddToQuan();
-    	TotalPriceLbl.setText("Price : "+tempItem.getTotalPrice().toString()+"$");
-    	QuanLbl.setText(tempItem.getQuan().toString());
-    }
 
     @FXML
     void Back(ActionEvent event) throws IOException {
     	start(event, "ClientCreateOrderScreen", "Create Order", "");
     }
+    @FXML
+    void Tocart(ActionEvent event) throws IOException {
+       start(event, "ClientCartScreen", "Cart Screen", "");
+    }
+    
+    @FXML
+    void AddQuan(ActionEvent event) {
+    	if(tempItem!=null ) {
+    		 cart.AddToCart(tempItem);
+    		 updateslbl();
+  
+          }
+    }
 
     @FXML
     void DecQuan(ActionEvent event) {
     	if(tempItem!=null) {
-    	    tempItem.DecToQuan();
-        if  (tempItem.getQuan()!=0) {
-        	TotalPriceLbl.setText("Price : "+tempItem.getTotalPrice().toString()+"$");
-        	QuanLbl.setText(tempItem.getQuan().toString());
+    	    cart.DecFromCart(tempItem);
+    	    updateslbl();
     	}
-        else {  
-        	TotalPriceLbl.setText("Price : ");
-        	QuanLbl.setText("0");
-          }
-    	}
-    	
     }
+    
+    private void updateslbl() {
+    	TotalPriceLbl.setText("Price : "+cart.getTotalPrice(itemId).toString()+"$");
+ 	    QuanLbl.setText(cart.getQuanOfProInCart(itemId).toString());
+ 	    this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
+    }
+    	
+    
 
     @FXML
     void ShowBridelProductsCatalog(ActionEvent event) {
@@ -136,18 +137,15 @@ public class ClientCatalogController extends AbstractController implements Initi
     
     @FXML
     void getItemDetails(ActionEvent event) {
-    	this.tempItem = null;
-            productNameLbl.setText("");
-            productPriceLbl.setText("");
-            productColorLbl.setText("");
-            this.productImage.setImage(null);
+           
     	try {
     	
               String Choosing_Item = listOfProduct.getValue();
               for (Item_In_Catalog i : Catalog) {
               	if (i.getName().compareTo(Choosing_Item)==0){
-              		this.tempItem = new ItemInOrder(i.getId(), i.getColor(), i.getName(),
-         				   i.getType(), i.getPrice(), i.isAssembleItem(),0);
+              		this.tempItem = new Item_In_Catalog(i.getId(), i.getColor(), i.getName(),
+         				   i.getType(), i.getPrice(), i.isAssembleItem());
+              		this.itemId=i.getId();
          		     break;
         	}
         }
@@ -157,19 +155,21 @@ public class ClientCatalogController extends AbstractController implements Initi
               productColorLbl.setText("Dominant color : "+(tempItem.getColor()).toString());
               Image im= new Image("/images/"+tempItem.getName()+".JPG");
               this.productImage.setImage(im);
-        
-        
+              
+
+              updateslbl();
              }catch(Exception e) {}
     }
     
+
     /*
      * This function initialize the choice box according the product type choosing by the user
      */
     
     private void InitialPerType(String typeName) {
-    	this.tempItem = null;
+    	setSelection();
     	TypeOfProduct = typeName;
-    	listOfProduct.setValue("choose product from list");
+    	this.listOfProduct.setDisable(false);
     	listOfProduct.getItems().clear();
     	ArrayList<String> Items =  new ArrayList<String>();
     	for (Item_In_Catalog i : Catalog) {
@@ -179,9 +179,19 @@ public class ClientCatalogController extends AbstractController implements Initi
     	}
     	listOfProduct.getItems().addAll(Items);
     	UpdateTypeProLabel.setText(TypeOfProduct);
-    	listOfProduct.setValue("Romantic bridel bouquet");
     }
 
+    private void setSelection() {
+    	tempItem =null;
+    	TotalPriceLbl.setText("Price : 0.0$ "+cart.getTotalPrice(itemId).toString()+"$");
+ 	    QuanLbl.setText("0");
+        productNameLbl.setText("");
+        productPriceLbl.setText("");
+        productColorLbl.setText("");
+        this.productImage.setImage(null);
+    	listOfProduct.setValue("choose product from list");
+    	
+    }
 	@Override
 	public void display(String string) {
 	
@@ -190,12 +200,13 @@ public class ClientCatalogController extends AbstractController implements Initi
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ClientUI.chat.accept(new Message(MessageType.Initialize_Catalog,"0"));
-    	InitialPerType("Bridel bouquet");
-
-    	UpdateTypeProLabel.setText("Bridel bouquets");
+		this.cart = CartScreenController.cart;
+		setSelection();
+    	this.listOfProduct.setDisable(true);
 		this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
 		CartBtn.setStyle("-fx-background-color: transparent;");
 		CartBtn.setGraphic(cartImage);
+    	UpdateTypeProLabel.setText("<--Choose category");
 	}
 
 }

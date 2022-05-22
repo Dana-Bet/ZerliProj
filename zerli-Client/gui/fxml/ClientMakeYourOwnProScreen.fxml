@@ -130,7 +130,7 @@
                </font>
             </Label>
             <TextArea fx:id="ProductComponent" layoutX="283.0" layoutY="425.0" prefHeight="157.0" prefWidth="368.0" />
-            <Button fx:id="CartBtn" layoutX="568.0" layoutY="7.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="112.0">
+            <Button fx:id="CartBtn" layoutX="568.0" layoutY="7.0" mnemonicParsing="false" onAction="#Tocart" prefHeight="63.0" prefWidth="112.0">
                <graphic>
                   <ImageView fx:id="cartImage" fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>

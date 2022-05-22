@@ -2,80 +2,114 @@ package Entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ClientCart<T extends Item_In_Catalog> {
-	      public Map<Integer,T> Order_Components;
+public class ClientCart {
+	      public Map<Integer,List <Item_In_Catalog>> Order_Components;
 	      public Float totalPrice;
+	      private int NumberOfItems;
 	   
 		public ClientCart () {
-	    	  this.Order_Components =new HashMap<>(); 
+	    	  this.Order_Components =new HashMap<Integer , List <Item_In_Catalog>>(); 
 	    	  this.totalPrice  = (float) 0;
+	    	  this. NumberOfItems = 0;
 	      }
 		
-		public void AddToCart(T i) {
+		public void AddToCart(Item_In_Catalog i) {
             
 			if(i instanceof assembledProduct)
 			{
-				Order_Components.put(i.getId(),i);
+				  i=(assembledProduct)i;
 			}
+			
+			if (Order_Components.containsKey(i.getId())) { 
+		        if(Order_Components.get(i.getId())!=null) {
+			     	Order_Components.get(i.getId()).add(i);
+		        }
+		        else {
+					Order_Components.replace(i.getId(),new ArrayList<Item_In_Catalog>());
+					Order_Components.get(i.getId()).add(i);
+		        }
+		     }
 			else {
-				if(Order_Components.containsKey(i.getId())) { //if exist
-					int q=((ItemInOrder)i).getQuan();
-					((ItemInOrder)Order_Components.get(i.getId())).setQuan(q);
-				}
-					else {
-						Order_Components.put(i.getId(),i);
-						int q=((ItemInOrder)i).getQuan();
-						((ItemInOrder)Order_Components.get(i.getId())).setQuan(q);
-						
-				}
-    	}
+				Order_Components.put(i.getId(), new ArrayList<Item_In_Catalog>());
+				Order_Components.get(i.getId()).add(i);
+				}	
+			NumberOfItems+=1;
+			
 	}
 
+		public void DecFromCart(Item_In_Catalog i) {
+            
+			if(i instanceof assembledProduct)
+			{
+				  i=(assembledProduct)i;
+			}
+			
+			if (Order_Components.containsKey(i.getId())) { 
+		        if(!Order_Components.get(i.getId()).isEmpty() && Order_Components.get(i.getId())!=null) {
+			     	Order_Components.get(i.getId()).remove(0);
+			     	NumberOfItems--;
+			     	if (Order_Components.get(i.getId()).isEmpty()){
+			     		Order_Components.remove(i.getId());
+			     	}
+		        }
+	       }
+			
+		}
+		
+		public void DecFromCartTable(int id) {
+
+			if (Order_Components.containsKey(id)) { 
+		        if(!Order_Components.get(id).isEmpty() && Order_Components.get(id)!=null) {
+			     	Order_Components.get(id).remove(0);
+			     	NumberOfItems--;
+			     	if (Order_Components.get(id).isEmpty()){
+			     		Order_Components.remove(id);
+			     	}
+		        }
+	       }
+			
+		}
 		
 	      
-	    public float OrderTotalPrice() {
-	    	  float price = 0;
+	     public Float OrderTotalPrice() {
+	    	  this.totalPrice = new Float(0);
 	    	  if (Order_Components!=null) {
-	    	       for(Item_In_Catalog i : Order_Components.values()) {
-	    	    		   price += i.getPrice();
+	    	       for(List<Item_In_Catalog> i : Order_Components.values()) {
+	    	    	   for(Item_In_Catalog j : i) {
+	    	    		   this.totalPrice +=j.getPrice();
+	    	    		   
+	    	    	   }
 	    	     }
 	    	  }
-			return price;
+			return totalPrice;
 	      }
-	      
-	      public ArrayList<String> Create_Recipt() {
-	    	  ArrayList<String> Recipt = new ArrayList<>();
-	    	  if (Order_Components!=null) {
-	    	       for(Item_In_Catalog i : Order_Components.values()) {
-	    	    	  if (i instanceof assembledProduct) {
-	    	    		  i = (assembledProduct)i;
-	    	    	  }
-	    	    	  else {
-	    	    	  i = (ItemInOrder)i; 
-	    	    	  }
-	    	    	  Recipt.add(new String(i.toString()));
-	    	     }
-	      }
-			  return Recipt;
-          
-	}
+
 	      
 	      public Integer getNumberOfItems() {
-	    	 int cnt = new Integer(0);
-	    	 if (Order_Components!=null) {
-	    	       for(Item_In_Catalog i : Order_Components.values()) {
-	    	    	   if(Order_Components.get(i.getId()) instanceof assembledProduct)
-	    				{
-	    					cnt+=1;
-	    				}
-	    	    	   else {
-	    	    		    cnt+=((ItemInOrder)i).getQuan();
-	    	    	   }
-	    	        }
+			return this.NumberOfItems; 
+	      }
+	      
+	      public Integer getQuanOfProInCart(int id) {
+	    	  List<Item_In_Catalog> ListOfSpecificProduct= this.Order_Components.get(id) ;
+	    	  if (ListOfSpecificProduct!=null) {
+	    		  return ListOfSpecificProduct.size();
+	    		  
 	    	  }
-			return cnt; 
+	    	  return 0 ;
+	      }
+	         
+	      
+	      public Float getTotalPrice(int id) {
+	    	  List<Item_In_Catalog> ListOfSpecificProduct= this.Order_Components.get(id) ;
+	    	  if (ListOfSpecificProduct!=null) {
+	    		  float pricePerOne = ListOfSpecificProduct.get(0).getPrice();
+	    		  return pricePerOne*ListOfSpecificProduct.size();
+	    		  
+	    	  }
+	    	  return (float) 0 ;
 	      }
 	         
 }

@@ -119,6 +119,11 @@ public class ClientAssemblyProductController extends AbstractController implemen
          }
              
 	    @FXML
+	    void Tocart(ActionEvent event) throws IOException {
+	       start(event, "ClientCartScreen", "Cart Screen", "");
+	    }
+	    
+	    @FXML
 	    void AddQuan(ActionEvent event) {
 	    	if (choosing_Type==null ) {
 	    		updatelbl.setText("Please choose Product Type");
