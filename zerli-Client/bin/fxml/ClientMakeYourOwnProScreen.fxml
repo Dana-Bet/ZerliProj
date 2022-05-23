@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="653.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientAssemblyProductController">
+   <children>
+      <AnchorPane opacity="0.67" prefHeight="653.0" prefWidth="247.0" style="-fx-background-image: url('/images/back6.JPG');">
+         <children>
+            <Button fx:id="BackBtn" layoutX="3.0" layoutY="601.0" mnemonicParsing="false" onAction="#Back" prefHeight="45.0" prefWidth="250.0" text="Back">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Button>
+            <Label layoutX="43.0" layoutY="36.0" prefHeight="90.0" prefWidth="183.0" text="Zer-Li" textFill="WHITE">
+               <font>
+                  <Font name="Yu Gothic UI Light" size="62.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <AnchorPane layoutX="251.0" layoutY="8.0" opacity="0.85" prefHeight="653.0" prefWidth="689.0">
+         <children>
+            <Button fx:id="PlusBtn" layoutX="67.0" layoutY="446.0" mnemonicParsing="false" onAction="#AddQuan" opacity="0.7" prefHeight="60.0" prefWidth="60.0">
+               <graphic>
+                  <ImageView disable="true" fitHeight="35.0" fitWidth="35.0">
+                     <image>
+                        <Image url="@../images/plusIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button layoutX="165.0" layoutY="446.0" mnemonicParsing="false" onAction="#DecQuan" opacity="0.7" prefHeight="60.0" prefWidth="60.0">
+               <graphic>
+                  <ImageView disable="true" fitHeight="35.0" fitWidth="35.0">
+                     <image>
+                        <Image url="@../images/minusIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Label fx:id="QuanLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="380.0" opacity="0.79" prefHeight="64.0" prefWidth="49.0" text="0">
+               <font>
+                  <Font size="43.0" />
+               </font>
+            </Label>
+            <Label fx:id="TotalPriceLbl" alignment="CENTER" layoutX="284.0" layoutY="596.0" prefHeight="32.0" prefWidth="210.0" text="Total Price : 0 $">
+               <font>
+                  <Font name="Yu Gothic Light" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="AddToCartBtn" layoutX="520.0" layoutY="590.0" mnemonicParsing="false" onAction="#AddProductToCart" prefHeight="38.0" prefWidth="131.0" text="Add to cart">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="281.0" layoutY="174.0" prefHeight="32.0" prefWidth="240.0" text="Catalog individual items :">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="productImage" fitHeight="286.0" fitWidth="200.0" layoutX="51.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="productNameLbl" layoutX="284.0" layoutY="269.0" prefHeight="32.0" prefWidth="147.0">
+               <font>
+                  <Font name="Yu Gothic Light" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="productNameLbl" layoutX="281.0" layoutY="279.0" prefHeight="32.0" prefWidth="274.0">
+               <font>
+                  <Font name="Yu Gothic Light" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="productPriceLbl" layoutX="281.0" layoutY="325.0" prefHeight="32.0" prefWidth="274.0">
+               <font>
+                  <Font name="Yu Gothic Light" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="productColorLbl" layoutX="281.0" layoutY="370.0" prefHeight="32.0" prefWidth="274.0">
+               <font>
+                  <Font name="Yu Gothic Light" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="281.0" layoutY="38.0" prefHeight="32.0" prefWidth="251.0" text="Choose type of product :">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="19.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="listOfProducts" layoutX="508.0" layoutY="178.0" onAction="#getItemDetails" prefHeight="25.0" prefWidth="147.0" />
+            <Label fx:id="priceByQuan" alignment="CENTER" layoutX="67.0" layoutY="534.0" prefHeight="32.0" prefWidth="167.0" text=" Price : 0 $">
+               <font>
+                  <Font name="Yu Gothic Light" size="18.0" />
+               </font>
+            </Label>
+            <VBox layoutX="278.0" layoutY="71.0" prefHeight="45.0" prefWidth="306.0">
+               <children>
+                  <RadioButton fx:id="FlowerPot" mnemonicParsing="false" onAction="#getProductType" prefHeight="17.0" prefWidth="129.0" text="Flower Pot">
+                     <font>
+                        <Font name="Yu Gothic UI Regular" size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="g1" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="Bouquet" mnemonicParsing="false" onAction="#getProductType" prefHeight="17.0" prefWidth="113.0" text="Bouquet" toggleGroup="$g1">
+                     <font>
+                        <Font name="Yu Gothic UI Regular" size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="Flowercluster" mnemonicParsing="false" onAction="#getProductType" prefHeight="17.0" prefWidth="131.0" text="Flowers cluster" toggleGroup="$g1">
+                     <font>
+                        <Font name="Yu Gothic UI Regular" size="14.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </VBox>
+            <Label fx:id="updatelbl" layoutX="284.0" layoutY="148.0" prefHeight="19.0" prefWidth="348.0" textFill="#eb1818">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="ProductComponent" layoutX="283.0" layoutY="425.0" prefHeight="157.0" prefWidth="368.0" />
+            <Button fx:id="CartBtn" layoutX="568.0" layoutY="7.0" mnemonicParsing="false" onAction="#Tocart" prefHeight="63.0" prefWidth="112.0">
+               <graphic>
+                  <ImageView fx:id="cartImage" fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@shopping-cart-png-icon-free-download-604195.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label fx:id="NumberOfProductLbl" layoutX="655.0" layoutY="42.0" prefHeight="25.0" prefWidth="15.0" textFill="#f80909" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

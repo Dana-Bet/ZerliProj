@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ManagerViewReportsOrders">
+   <children>
+      <Button fx:id="backBtn" layoutX="102.0" layoutY="459.0" mnemonicParsing="false" onAction="#back" text="Back">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="productTypeBtn" layoutX="88.0" layoutY="69.0" prefWidth="150.0" />
+      <Button fx:id="showOradersBtn" layoutX="98.0" layoutY="192.0" mnemonicParsing="false" onAction="#ShowOrdersReport" prefHeight="58.0" prefWidth="122.0" text="Show Orders">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <TableView fx:id="table" layoutX="321.0" layoutY="69.0" prefHeight="304.0" prefWidth="457.0">
+        <columns>
+          <TableColumn fx:id="monthcol" prefWidth="112.800048828125" text="month" />
+          <TableColumn fx:id="yearcol" prefWidth="82.39996337890625" text="year" />
+            <TableColumn fx:id="storecol" prefWidth="114.39996337890625" text="store" />
+            <TableColumn fx:id="Quantitycol" prefWidth="143.2000732421875" text="Quantity" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

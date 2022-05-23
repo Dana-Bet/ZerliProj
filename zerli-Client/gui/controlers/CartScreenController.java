@@ -68,9 +68,11 @@ public class CartScreenController extends AbstractController implements Initiali
         void removeFromProduct(ActionEvent event) {
             ObservableList<LineInCartTable> list;
             list = this.tableV.getSelectionModel().getSelectedItems();
+            if(list!=null) {
             int id =list.get(0).getId() ;
             cart.DecFromCartTable(id);
             this.initialize(location, resources) ;
+            }
         }
 
         public void UpdateCart(){

@@ -2,10 +2,8 @@ package Entities;
 
 import java.io.Serializable;
 
-public class LineInCartTable  implements Serializable{
+public class LineInCartTable{
 
-
-	private static final long serialVersionUID = 1L;
 	private int id;
 	private int quan;
 	private String name;
