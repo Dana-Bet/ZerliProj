@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,7 +22,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <CheckBox fx:id="addGreeting" layoutX="82.0" layoutY="95.0" mnemonicParsing="false" text="Attach greeting card " />
+      <CheckBox fx:id="addGreeting" layoutX="82.0" layoutY="95.0" mnemonicParsing="false" onAction="#addGreetingChoice" text="Attach greeting card " />
       <Text layoutX="261.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inset greeting :" textAlignment="CENTER" wrappingWidth="187.5366973876953">
          <font>
             <Font size="18.0" />
@@ -33,14 +34,13 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <DatePicker fx:id="dateBox" layoutX="355.0" layoutY="150.0" prefHeight="26.0" prefWidth="113.0" promptText="14/05/22" />
-      <TextField fx:id="HourTextField" layoutX="547.0" layoutY="149.0" promptText="14:00" />
+      <DatePicker fx:id="dateBox" layoutX="355.0" layoutY="150.0" onAction="#setTime" prefHeight="26.0" prefWidth="113.0" promptText="08/06/22" />
       <Text layoutX="79.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suppliment method :" textAlignment="CENTER" wrappingWidth="172.5366973876953">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="DeliveryMethodChoice" layoutX="279.0" layoutY="207.0" prefHeight="28.0" prefWidth="252.0" />
+      <ChoiceBox fx:id="DeliveryMethodChoice" layoutX="286.0" layoutY="205.0" onAction="#getDeliveryDetails" prefHeight="28.0" prefWidth="252.0" />
       <Button fx:id="backBtn" layoutX="24.0" layoutY="592.0" mnemonicParsing="false" onAction="#Back" prefHeight="42.0" prefWidth="141.0" text="Back to cart page" AnchorPane.leftAnchor="24.0">
          <font>
             <Font name="Yu Gothic Light" size="14.0" />
@@ -49,49 +49,42 @@
          <font>
             <Font name="Yu Gothic Light" size="14.0" />
          </font></Button>
-      <GridPane layoutX="55.0" layoutY="295.0" prefHeight="228.0" prefWidth="652.0">
+      <GridPane fx:id="gridPane" layoutX="42.0" layoutY="306.0" opacity="0.75" prefHeight="184.0" prefWidth="652.0">
         <columnConstraints>
-          <ColumnConstraints halignment="LEFT" hgrow="NEVER" minWidth="10.0" prefWidth="200.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="245.0" minWidth="10.0" prefWidth="245.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="447.0" minWidth="10.0" prefWidth="407.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints fx:id="City" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City :" textAlignment="CENTER" wrappingWidth="49.53669738769531">
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
-            <TextField fx:id="CityTextFiled" prefHeight="45.0" prefWidth="452.0" GridPane.columnIndex="1" />
+            <TextField fx:id="CityTextFiled" prefHeight="36.0" prefWidth="452.0" GridPane.columnIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address :" textAlignment="CENTER" wrappingWidth="73.53669434785843" GridPane.rowIndex="1">
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Postcode :" textAlignment="CENTER" wrappingWidth="81.53669434785843" GridPane.rowIndex="2">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reciver's order phone number:" textAlignment="CENTER" wrappingWidth="224.53669749945402" GridPane.rowIndex="2">
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reciver's order phone number:" textAlignment="CENTER" wrappingWidth="208.53669749945402" GridPane.rowIndex="3">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reciver's order name:" textAlignment="CENTER" wrappingWidth="152.53670874983072" GridPane.rowIndex="3">
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reciver's order name:" textAlignment="CENTER" wrappingWidth="152.53670874983072" GridPane.rowIndex="4">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <TextField fx:id="AddressTextFiled" prefHeight="45.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="postCodeTextFiled" prefHeight="43.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="ReciverPhoneText" prefHeight="42.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="ReciverNameText" prefHeight="43.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="AddressTextFiled" prefHeight="36.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="ReciverPhoneText" prefHeight="36.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="ReciverNameText" prefHeight="37.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
          <effect>
             <Blend />
@@ -102,5 +95,12 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <Label fx:id="UpLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="258.0" prefHeight="31.0" prefWidth="465.0" textFill="RED" />
+      <ChoiceBox fx:id="timeChoiseList" layoutX="560.0" layoutY="150.0" onAction="#setTime" prefHeight="31.0" prefWidth="132.0" />
+      <Label fx:id="UpLbl1" alignment="CENTER" contentDisplay="CENTER" layoutX="370.0" layoutY="126.0" prefHeight="19.0" prefWidth="361.0" textFill="RED">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

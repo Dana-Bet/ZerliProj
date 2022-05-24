@@ -99,8 +99,8 @@ public class CartScreenController extends AbstractController implements Initiali
         }
 
         @FXML
-        void ContinueToOrderPage(ActionEvent event) {
-
+        void ContinueToOrderPage(ActionEvent event) throws IOException {
+        	start(event, "ClientOrderPage", "Order page", "");
         }
         
     	@Override

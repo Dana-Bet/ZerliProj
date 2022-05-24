@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class ClientCreateOrderController extends AbstractController   {;
+public class ClientCreateOrderController extends AbstractController   {
 
     @FXML
     private ImageView cartImage;

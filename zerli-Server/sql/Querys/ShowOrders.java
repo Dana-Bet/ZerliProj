@@ -28,7 +28,7 @@ public class ShowOrders {
 					String shop = rs.getString("shop");
 					String date = rs.getString("date");
 					String orderDate = rs.getString("orderDate");
-					orders.add(new Order(orderNumber,price,greetingCard,color,dOrder,shop,date,orderDate));
+				//	orders.add(new Order(orderNumber,price,greetingCard,color,dOrder,shop,date,orderDate));
 				}
 				rs.close();
 			} else {

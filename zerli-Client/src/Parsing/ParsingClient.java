@@ -7,10 +7,12 @@ import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.OrdersReport;
 import Entities.RevenueReport;
+import Entities.Store;
 import Entities.User;
 import controlers.CartScreenController;
 import controlers.ClientAssemblyProductController;
 import controlers.ClientCatalogController;
+import controlers.ClientOrderPageController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
 import controlers.ManagerFreezeController;
@@ -99,9 +101,19 @@ public class ParsingClient {
 		case getTypeProductForCatalog_succ:{
 			UpdateItemsInCatalogController.productType1 = (ArrayList<String>)(receivedMessage.getMessageData());
 		}
+		case InitialShopsList_succ :{
+			ArrayList<Store> stores= new ArrayList<>();
+			stores = (ArrayList<Store>) (receivedMessage.getMessageData());
+			ClientOrderPageController.storesList = stores;
+		}
+		case CreditCardList_succ :{
+		 PaymentScreenController
+		}
 		default:{
 			break;
 		}
   }
 }
+	
+	
 }

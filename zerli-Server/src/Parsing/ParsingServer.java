@@ -8,6 +8,7 @@ import Entities.Message;
 import Entities.MessageType;
 import Entities.OrdersReport;
 import Entities.RevenueReport;
+import Entities.Store;
 import Querys.Query;
 import controllers.LogicController;
 import ocsf.server.ConnectionToClient;
@@ -16,11 +17,6 @@ public class ParsingServer {
 
 	public static Message parsing(Object msg, ConnectionToClient client) {
 		Message receivedMessage = (Message) msg;
-		System.out.println("line 18 parsingServer");
-		System.out.println(msg);
-		System.out.println(receivedMessage.getMessageType());
-		System.out.println(receivedMessage.getMessageData());
-		
 		switch (receivedMessage.getMessageType()) {
 		
 		case userlogin: {
@@ -95,6 +91,16 @@ public class ParsingServer {
 		case getTypeProductForUpdateCatalog1: {
 			ArrayList<String> productype = (ArrayList<String>) Query.getProductType1();
 			return (new Message(MessageType.getTypeProductForCatalog_succ,productype));
+		}
+		case InitialShopsList:{
+			ArrayList<Store> Stores= Query.InitialShopsList();
+			return (new Message(MessageType.InitialShopsList_succ,Stores));
+			
+		}
+		case CreditCardList:{
+			String userId = (String) receivedMessage.getMessageData();
+			ArrayList<String> creditCards= Query.CreditCardList(userId);
+			return (new Message(MessageType.CreditCardList_succ,creditCards));
 		}
 		default:
 			break;

@@ -10,6 +10,7 @@ import Entities.Item_In_Catalog;
 import Entities.Order;
 import Entities.OrdersReport;
 import Entities.RevenueReport;
+import Entities.Store;
 
 public class Query {
 
@@ -378,6 +379,46 @@ public class Query {
 				}
 			return types;			
 		}
+		
+		
+		public static ArrayList<Store> InitialShopsList (){
+			ArrayList<Store> stores = new ArrayList<Store>();
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT * FROM zerli_db.stores");
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					stores.add(new Store(rs.getString("storeCode"),rs.getString("city"),rs.getString("address")));
+				}
+					rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+	
+		return stores;
+		
+		}
+
+		public static ArrayList<String> CreditCardList(String userId) {
+			ArrayList<String> creditCards = new ArrayList<String>();
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT creditcardsNum FROM zerli_db.creditcards WHERE client_id = ?");
+				stmt.setString(1,userId);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					creditCards.add(rs.getString("creditcardsNum"));
+				}
+					rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+	
+		return creditCards;
+		}
+		
+		
+		
 	}
 
 

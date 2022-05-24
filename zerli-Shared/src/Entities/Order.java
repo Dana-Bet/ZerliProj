@@ -8,25 +8,32 @@ public class Order implements Serializable{
 	private int orderNumber;
 	private int price;
 	private String greetingCard;
-	private String color;
-	private String dOrder;
-	private String shop;
-	private String date;
-	private String orderDate;
-	
-	//Builder to update order
+	private String store;
+    private String ClientId;
+    private String SupplimentMethod;
+    private String status;
+    private String suppTimeS;
+    private String orderTimeS;
+    
+	public OrderTime orderTime = null;
+	public OrderTime suppTime = null;
+	public Delivery delivery =null;
+
 	public Order(int OrderNumber,int price,String greetingCard,
-			String color,String dOrder,String shop,String date,String orderDate)
+			String store,String ClientId,String suppTime,String suppmethod)
 	{
 		this.orderNumber = OrderNumber;
 		this.price = price;
 		this.greetingCard =greetingCard;
-		this.color = color;
-		this.dOrder = dOrder;
-		this.shop = shop;
-		this.date = date;
-		this.orderDate = orderDate;
+		this.status = "waiting for confirmation";
+		this.SupplimentMethod = suppmethod;
+		this.store = store;
+		this.ClientId = ClientId;
+		this.suppTimeS = orderTime.toString();
+		this.orderTimeS = suppTime.toString();
+	
 	}
+
 	
 	public int getOrderNumber()
 	{
@@ -57,55 +64,48 @@ public class Order implements Serializable{
 	{
 		this.greetingCard = greetingCard;
 	}
-	
-	public String getColor()
-	{
-		return color;
+
+	public String getStore() {
+		return store;
+	}
+
+	public String getClientId() {
+		return ClientId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public String getSupplimentMethod() {
+		return SupplimentMethod;
+	}
+
+
+	public String getSuppTimeS() {
+		return suppTimeS;
+	}
+
+
+	public String getOrderTimeS() {
+		return orderTimeS;
+	}
+
+
+	public Delivery getDelivery() {
+		return delivery;
+	}
+
+
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
 	}
 	
-	public void setColor(String color)
-	{
-		this.color = color;
-	}
-	
-	public String getDOrder()
-	{
-		return dOrder;
-	}
-	
-	public void setDOrder(String dOrder)
-	{
-		this.dOrder = dOrder;
-	}
-	
-	public String getShop()
-	{
-		return shop;
-		
-	}
-	
-	public void setShop(String shop)
-	{
-		this.shop = shop;
-	}
-	
-	public String getDate()
-	{
-		return date;
-	}
-	
-	public void setDate(String date)
-	{
-		this.date = date;
-	}
-	
-	public String getOrderDate()
-	{
-		return orderDate;
-	}
-	
-	public void setOrderDate(String orderdate)
-	{
-		this.orderDate = orderdate;
-	}
+
+
 }
