@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="586.0" prefWidth="720.0" style="-fx-background-image: url('file:C:/Users/Dana/git/ZerliProj/zerli-Client/gui/images/back11.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.PaymentScreenController">
    <children>
-      <TextField fx:id="CardNumberTxt" layoutX="179.0" layoutY="183.0" prefHeight="25.0" prefWidth="428.0" />
+      <TextField fx:id="CardNumberTxt" layoutX="179.0" layoutY="183.0" prefHeight="31.0" prefWidth="428.0" />
       <Label layoutX="69.0" layoutY="183.0" prefHeight="26.0" prefWidth="84.0" text="Card No :">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="CardHolderTxt" layoutX="187.0" layoutY="140.0" prefHeight="25.0" prefWidth="181.0" />
+      <TextField fx:id="CardHolderTxt" layoutX="179.0" layoutY="140.0" prefHeight="31.0" prefWidth="189.0" />
       <Label layoutX="69.0" layoutY="140.0" prefHeight="26.0" prefWidth="122.0" text="Card holder :">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <TextField fx:id="IdTxt" layoutX="449.0" layoutY="141.0" prefHeight="25.0" prefWidth="158.0" />
-      <Label layoutX="402.0" layoutY="140.0" prefHeight="26.0" prefWidth="39.0" text="ID :">
          <font>
             <Font size="17.0" />
          </font>
@@ -41,46 +36,54 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="totalPrice" layoutX="70.0" layoutY="313.0" prefHeight="26.0" prefWidth="108.0" text="Total Price : ">
+      <Label layoutX="70.0" layoutY="313.0" prefHeight="26.0" prefWidth="108.0" text="Total price : ">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="TotalPriceLbl" layoutX="179.0" layoutY="313.0" prefHeight="26.0" prefWidth="54.0">
+      <Label fx:id="TotalPriceLbl" layoutX="179.0" layoutY="313.0" prefHeight="26.0" prefWidth="108.0">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Button fx:id="backBtn" layoutX="33.0" layoutY="528.0" mnemonicParsing="false" onAction="#BackOrderPage" prefHeight="43.0" prefWidth="181.0" text="back to order page">
+      <Button fx:id="backBtn" layoutX="33.0" layoutY="508.0" mnemonicParsing="false" onAction="#BackOrderPage" prefHeight="43.0" prefWidth="181.0" text="back to order page">
          <font>
             <Font name="Yu Gothic UI Light" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="confirmPaymentBtn" layoutX="492.0" layoutY="527.0" mnemonicParsing="false" onAction="#confirmPayment" prefHeight="45.0" prefWidth="200.0" text="confirm payment">
+      <Button fx:id="confirmPaymentBtn" layoutX="502.0" layoutY="510.0" mnemonicParsing="false" onAction="#confirmPayment" prefHeight="42.0" prefWidth="200.0" text="confirm payment">
          <font>
             <Font name="Yu Gothic UI Light" size="17.0" />
          </font>
       </Button>
-      <ChoiceBox fx:id="cardsList" layoutX="332.0" layoutY="35.0" opacity="0.7" prefHeight="25.0" prefWidth="284.0" />
-      <ChoiceBox fx:id="creditList" layoutX="206.0" layoutY="269.0" opacity="0.72" prefHeight="25.0" prefWidth="158.0" onAction="#useCredit" />
-      <VBox fx:id="g1" layoutX="70.0" layoutY="21.0" prefHeight="103.0" prefWidth="261.0">
+      <ChoiceBox fx:id="cardsList" layoutX="407.0" layoutY="35.0" onAction="#getCardFromL" opacity="0.7" prefHeight="31.0" prefWidth="233.0" />
+      <ChoiceBox fx:id="creditList" layoutX="206.0" layoutY="269.0" onAction="#useCredit" opacity="0.72" prefHeight="25.0" prefWidth="158.0" />
+      <VBox layoutX="69.0" layoutY="28.0" prefHeight="76.0" prefWidth="323.0">
          <children>
-            <CheckBox fx:id="DefaultCardBtn" mnemonicParsing="false" onAction="#defultPay" prefHeight="49.0" prefWidth="241.0" text="Choose payment method : ">
+            <RadioButton fx:id="DefaultCardBtn" mnemonicParsing="false" onAction="#getPaymentMethod" prefHeight="38.0" prefWidth="319.0" text="Choose from your payment methods : " toggleGroup="$g2">
                <font>
-                  <Font size="17.0" />
+                  <Font size="16.0" />
                </font>
-            </CheckBox>
-            <CheckBox fx:id="NewCardBtn" mnemonicParsing="false" onAction="#AddNewPay" prefHeight="48.0" prefWidth="238.0" text="Add new payment method ">
+               <toggleGroup>
+                  <ToggleGroup fx:id="g2" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="NewCardBtn" mnemonicParsing="false" onAction="#getPaymentMethod" prefHeight="42.0" prefWidth="270.0" text="Add new payment method" toggleGroup="$g2">
                <font>
-                  <Font size="17.0" />
+                  <Font size="16.0" />
                </font>
-            </CheckBox>
+            </RadioButton>
          </children>
       </VBox>
       <DatePicker fx:id="exDatePicker" layoutX="206.0" layoutY="223.0" onAction="#exDateP" prefHeight="25.0" prefWidth="158.0" />
       <Label layoutX="70.0" layoutY="268.0" prefHeight="26.0" prefWidth="108.0" text="Credit to use:">
          <font>
             <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="upLbl" layoutX="153.0" layoutY="108.0" prefHeight="26.0" prefWidth="428.0" textAlignment="RIGHT" textFill="RED">
+         <font>
+            <Font size="13.0" />
          </font>
       </Label>
    </children>

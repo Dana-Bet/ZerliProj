@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import Entities.ClientCart;
 import Entities.Item_In_Catalog;
 import Entities.LineInCartTable;
+import Entities.Message;
+import Entities.MessageType;
 import Entities.assembledProduct;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import main.ClientUI;
 
 
 public class CartScreenController extends AbstractController implements Initializable {
@@ -62,6 +65,9 @@ public class CartScreenController extends AbstractController implements Initiali
 
         @FXML
         private Button removeBtn;
+        
+        @FXML
+        private Label uplbl;
 
 
         @FXML
@@ -97,9 +103,15 @@ public class CartScreenController extends AbstractController implements Initiali
         void BackBtn(ActionEvent event) throws IOException {
         	start(event, "ClientCreateOrderScreen", "Create Order", "");
         }
+        
 
         @FXML
         void ContinueToOrderPage(ActionEvent event) throws IOException {
+        	if (cart.Order_Components.isEmpty()||this.cart.getNumberOfItems()==0) {
+        		this.uplbl.setText("Your cart is empty");
+        		return;
+        		
+        	}
         	start(event, "ClientOrderPage", "Order page", "");
         }
         
@@ -117,7 +129,7 @@ public class CartScreenController extends AbstractController implements Initiali
     		PriceCol.setCellValueFactory(new PropertyValueFactory<>("Price"));
     		tableV.setItems(observableList);
     		PriceLbl.setText("Total price :"+cart.OrderTotalPrice().toString()+"$");
-    		
+       		this.uplbl.setText("");
 	}
 
 	    @Override

@@ -1,6 +1,14 @@
 package Entities;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Order implements Serializable{
 
@@ -12,25 +20,39 @@ public class Order implements Serializable{
     private String ClientId;
     private String SupplimentMethod;
     private String status;
-    private String suppTimeS;
-    private String orderTimeS;
     
-	public OrderTime orderTime = null;
-	public OrderTime suppTime = null;
+
+	public LocalTime suppTime = null;
+	public Date suppDate = null;
+	
 	public Delivery delivery =null;
 
 	public Order(int OrderNumber,int price,String greetingCard,
-			String store,String ClientId,String suppTime,String suppmethod)
+			String store,String ClientId,LocalTime suppTime,Date suppDate,String suppmethod)
 	{
 		this.orderNumber = OrderNumber;
 		this.price = price;
+		this.greetingCard =greetingCard;
+		this.status = "not confirm";
+		this.SupplimentMethod = suppmethod;
+		this.store = store;
+		this.ClientId = ClientId;
+		this.suppDate = suppDate;
+		this.suppTime = suppTime;
+
+	
+	}
+	public Order(String greetingCard,
+			String store,String ClientId,LocalTime suppTime,Date suppDate,String suppmethod)
+	{
+		
 		this.greetingCard =greetingCard;
 		this.status = "waiting for confirmation";
 		this.SupplimentMethod = suppmethod;
 		this.store = store;
 		this.ClientId = ClientId;
-		this.suppTimeS = orderTime.toString();
-		this.orderTimeS = suppTime.toString();
+		this.suppDate = suppDate;
+		this.suppTime = suppTime;
 	
 	}
 
@@ -81,19 +103,19 @@ public class Order implements Serializable{
 		this.status = status;
 	}
 
-
+    
 	public String getSupplimentMethod() {
 		return SupplimentMethod;
 	}
 
 
-	public String getSuppTimeS() {
-		return suppTimeS;
+	public String getSuppTime() {
+		
+		return this.suppTime.toString();
 	}
 
-
-	public String getOrderTimeS() {
-		return orderTimeS;
+	public String getSuppDate() {
+		return this.suppDate.toString();
 	}
 
 

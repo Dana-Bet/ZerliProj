@@ -1,14 +1,16 @@
 package controlers;
 
-import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class ClientOrdersController extends AbstractController {
+public class ClientOrdersController extends AbstractController implements Initializable {
 
     @FXML
     private TableView<?> table;
@@ -17,22 +19,22 @@ public class ClientOrdersController extends AbstractController {
     private TableColumn<?, ?> orderNumberCol;
 
     @FXML
-    private TableColumn<?, ?> priceCol;
+    private TableColumn<?, ?> storeCol;
 
     @FXML
     private TableColumn<?, ?> greetingCardCol;
 
     @FXML
-    private TableColumn<?, ?> colorCol;
+    private TableColumn<?, ?> priceCol;
 
     @FXML
     private TableColumn<?, ?> DeliveryMethodCol;
 
     @FXML
-    private TableColumn<?, ?> ShopCol;
+    private TableColumn<?, ?> suppTimeCol;
 
     @FXML
-    private TableColumn<?, ?> DateCol;
+    private TableColumn<?, ?> suppDateCol;
 
     @FXML
     private TableColumn<?, ?> OrderTimeCol;
@@ -41,9 +43,15 @@ public class ClientOrdersController extends AbstractController {
     private Button backBtn;
 
     @FXML
-    void backMainPage(ActionEvent event) throws IOException {
-    	start(event, "ClientMainPage", "Customer Screen", "");
+    void backMainPage(ActionEvent event) {
+
     }
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void display(String string) {
@@ -52,3 +60,4 @@ public class ClientOrdersController extends AbstractController {
 	}
 
 }
+

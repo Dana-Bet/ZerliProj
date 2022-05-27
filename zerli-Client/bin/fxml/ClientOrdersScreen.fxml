@@ -9,16 +9,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="913.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientOrdersController">
    <children>
-      <TableView fx:id="table" layoutX="32.0" layoutY="119.0" opacity="0.84" prefHeight="428.0" prefWidth="852.0">
+      <TableView fx:id="table" layoutX="32.0" layoutY="119.0" opacity="0.84" prefHeight="193.0" prefWidth="852.0">
          <columns>
             <TableColumn fx:id="orderNumberCol" prefWidth="93.60000324249268" style="-fx-alignment: CENTER;" text="Order No" />
-            <TableColumn fx:id="priceCol" prefWidth="60.79998779296875" style="-fx-alignment: CENTER;" text="price" />
-            <TableColumn fx:id="greetingCardCol" prefWidth="108.80000305175781" text="greetingCard" />
-            <TableColumn fx:id="colorCol" prefWidth="110.4000244140625" text="color" />
-            <TableColumn fx:id="DeliveryMethodCol" minWidth="0.0" prefWidth="129.0" text="Delivery Method" />
-            <TableColumn fx:id="ShopCol" prefWidth="76.0" text="Shop" />
-            <TableColumn fx:id="DateCol" prefWidth="133.60003662109375" text="Date" />
-            <TableColumn fx:id="OrderTimeCol" prefWidth="136.0" text="Order Time" />
+            <TableColumn fx:id="storeCol" prefWidth="60.79998779296875" style="-fx-alignment: CENTER;" text="Store" />
+            <TableColumn fx:id="greetingCardCol" prefWidth="108.80000305175781" text="Greeting" />
+            <TableColumn fx:id="priceCol" prefWidth="110.4000244140625" text="Price" />
+            <TableColumn fx:id="DeliveryMethodCol" minWidth="0.0" prefWidth="129.0" text="Delivery method" />
+            <TableColumn fx:id="suppTimeCol" prefWidth="135.0" text="Suppliment time" />
+            <TableColumn fx:id="suppDateCol" prefWidth="126.0" text="Suppliment date" />
+            <TableColumn fx:id="OrderTimeCol" prefWidth="85.0" text="Order Time" />
          </columns>
       </TableView>
       <Button fx:id="backBtn" layoutX="27.0" layoutY="565.0" mnemonicParsing="false" onAction="#backMainPage" prefHeight="28.0" prefWidth="123.0" style="-fx-background-radius: 30;" text="Back">

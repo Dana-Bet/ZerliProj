@@ -102,5 +102,10 @@
             <Font size="12.0" />
          </font>
       </Label>
+      <Label fx:id="deliveryPrice" layoutX="550.0" layoutY="208.0" prefHeight="25.0" prefWidth="141.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -2,6 +2,7 @@ package controlers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.ResourceBundle;
 import Entities.Delivery;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.Order;
 import Entities.Store;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,15 +33,18 @@ public class ClientOrderPageController  extends AbstractController implements In
 	
 	private String choosingShop = null;
 	private String DeliverM = null;
+	private boolean IsDelivery ; 
 	private String greeting = null;
     private boolean AddGreeting = false;
-    private boolean setTime = false;
-    
-	private LocalDate suppDate ;
-	private LocalTime suppHourVal;
+    public static Order order;
+	public static Float TotalPrice;
 	
-	public Delivery delivery;
+	public static LocalTime orderTime = null;
+	public LocalTime suppTime = null;
+	public static Date orderDate = null;
+	public Date suppDate = null;;
 
+	final int delivery_price = 10;
 
     @FXML
     private ChoiceBox<String> shopDropDownMenu;
@@ -85,6 +90,9 @@ public class ClientOrderPageController  extends AbstractController implements In
     private Label UpLbl;
     
     @FXML
+    private Label deliveryPrice;
+    
+    @FXML
     private GridPane gridPane;
     
     @FXML
@@ -98,11 +106,24 @@ public class ClientOrderPageController  extends AbstractController implements In
     @FXML
     void ToPayScreen(ActionEvent event) throws IOException {
     	setTime();
-    	checkAllFileds();
-    	//start(event, "PaymentScreen", "Payment screen", "");
+    	if(checkAllFileds()!=1) {return;}
+    	if(this.IsDelivery) {
+    		TotalPrice -=this.delivery_price;
+    	}
+    	createOrder();
+    	start(event, "PaymentScreen", "Payment screen", "");
     }
     
-    @FXML
+	private void createOrder() {
+		if (AddGreeting) {
+			order = new Order(greeting,choosingShop,LoginScreenController.user.getId(),this.suppTime,this.suppDate,this.DeliverM);	
+	}
+		else {
+			order = new Order("without",choosingShop,LoginScreenController.user.getId(),this.suppTime,this.suppDate,this.DeliverM);	
+			}
+		}
+
+	@FXML
     private void getDeliveryDetails(ActionEvent event) {
     	this.DeliverM = this.DeliveryMethodChoice.getValue();
     	if (DeliverM.compareTo("delivery")==0) {
@@ -110,12 +131,16 @@ public class ClientOrderPageController  extends AbstractController implements In
     		this.AddressTextFiled.setDisable(false);
     		this.ReciverPhoneText.setDisable(false);
     		this.ReciverNameText.setDisable(false);
+   	        this.deliveryPrice.setText("Extra "+this.delivery_price+"$ shipping");
+   	        this.IsDelivery=true;
     	}
     	else {
     		this.CityTextFiled.setDisable(true);
     		this.AddressTextFiled.setDisable(true);
     		this.ReciverPhoneText.setDisable(true);
     		this.ReciverNameText.setDisable(true);
+   	        this.deliveryPrice.setText("");
+   	        this.IsDelivery=false;
     	}
     }
     
@@ -140,79 +165,97 @@ public class ClientOrderPageController  extends AbstractController implements In
 
     @FXML
 	private void setTime() {
-	    this.setTime = true;
+		LocalDate suppDate ;
+		LocalTime suppHourVal =LocalTime.now();
+		
         this.UpLbl.setText("");
         this.UpLbl1.setText("");
+        
     	if(this.dateBox == null || this.timeChoiseList.getValue() ==null ) {
     		this.UpLbl.setText("Please fill all reguired fileds");
     		return;
     	}
     	else {
-    		this.suppDate = this.dateBox.getValue();
+    		suppDate = this.dateBox.getValue();
             String supphour = this.timeChoiseList.getValue();
             for(LocalTime t : this.hourList) {
             	if(supphour.compareTo(t.toString())==0) {
-            		this.suppHourVal = t;
+            		suppHourVal = t;
+            		
             	}
             }
     		
     	}
     	LocalDate nowd = LocalDate.now();
     	LocalTime nowh = LocalTime.now();
-    	if (this.suppDate.compareTo(nowd)==-1) {
+    	if (suppDate.compareTo(nowd)==-1) {
     		this.UpLbl.setText("There is a problem with the supplier date, please select other date.");
     		return;
     	}
-    	if (this.suppDate.compareTo(nowd)==0 && (this.suppHourVal.compareTo(nowh)==0 ||this.suppHourVal.compareTo(nowh)==-1)) {
+    	if (suppDate.compareTo(nowd)==0 && (suppHourVal.compareTo(nowh)==0 ||suppHourVal.compareTo(nowh)==-1)) {
     		this.UpLbl.setText("There is a problem with the supplier time, please select other hour.");
     		return;
     	}
+    	
+    	this.suppDate=Date.valueOf(suppDate);
+    	this.suppTime=suppHourVal;
     }
 
-	private void checkAllFileds() {
+	private int checkAllFileds() {
 	     this.UpLbl.setText("");
 	     this.UpLbl1.setText("");
-	     if(this.shopDropDownMenu.getValue()==null){
+	     this.deliveryPrice.setText("");
+	     if(shopDropDownMenu.getValue()==null){
 	    	this.UpLbl.setText("Please choose store");
-	    	return;
+	    	return 0;
 	     }
 		 this.choosingShop = this.shopDropDownMenu.getValue();
-		 if(this.addGreeting.isSelected()) {
+		 if(addGreeting.isSelected()) {
 			 this.greeting = this.GreetingText.getText();
 			 if (greeting.isEmpty()) {
 				 this.UpLbl1.setText("Please insert greeting");
-				 return;
+				 return 0;
 			 }
 		 }
-
-		 setTime();
+	     if(this.dateBox == null || this.timeChoiseList.getValue() ==null ) {
+	    		this.UpLbl.setText("Please fill time for suppliement");
+	    		return 0;
+	     }
+		 if(this.DeliverM!=null) {
 		 if(this.DeliverM.compareTo("delivery")==0) {
 			 if(this.CityTextFiled.getText().isEmpty()||this.AddressTextFiled.getText().isEmpty()||this.ReciverPhoneText.getText().isEmpty()||this.ReciverNameText.getText().isEmpty()) {
 				 this.UpLbl.setText("Please fill all delivery reguired fileds");
-				 return;
+				 return 0;
 			 }
 			 else {
-				 this.delivery = new Delivery(this.CityTextFiled.getText(), this.AddressTextFiled.getText(),this.ReciverPhoneText.getText(), this.ReciverNameText.getText());
+				 order.delivery = new Delivery(this.CityTextFiled.getText(), this.AddressTextFiled.getText(),this.ReciverPhoneText.getText(), this.ReciverNameText.getText());
 			 }
 		 }
-		 else if (this.DeliverM==null) {
+		     else if (this.DeliverM==null) {
 	    		this.UpLbl.setText("Please fill all reguired fileds");
-	    		return;
+	    		return 0;
+		   }
+		 
 		 }
+		 else {
+			 this.UpLbl.setText("Please fill all delivery reguired fileds");
+			 return 0;
+		 }
+		 return 1;
 		 
 	 }
 	 
 	 
      private ArrayList<LocalTime> CreateOpeningTimeList() {
     	 this.hourList = new ArrayList<LocalTime>();
-    	 LocalTime current = LocalTime.of(9,0);
+    	 LocalTime current = LocalTime.of(9,0,0);
     	 int i =current.getHour();
     	 while( i < 21)
     	 {
     		     hourList.add(current.plusMinutes(30));	
     			 hourList.add(current.plusHours(1));	 
     			 i++;
-    			 current = LocalTime.of(i, 0);
+    			 current = LocalTime.of(i,0,0);
     	 }
 		return hourList;
     	 
@@ -223,10 +266,11 @@ public class ClientOrderPageController  extends AbstractController implements In
 	
 	}
 	
-	public void setOrder() {}
-    
+
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		TotalPrice = CartScreenController.cart.OrderTotalPrice();
 		ClientOrderPageController.storesList = new ArrayList <Store>();
 		this.storesNames = new ArrayList <String>();
 		ClientUI.chat.accept(new Message(MessageType.InitialShopsList,""));
@@ -249,5 +293,9 @@ public class ClientOrderPageController  extends AbstractController implements In
         this.UpLbl.setText("");
         this.UpLbl1.setText("");
 	}
+
+
+
+
 
 }

@@ -3,6 +3,7 @@ package Parsing;
 import java.util.ArrayList;
 
 import Entities.Client;
+import Entities.CreditCard;
 import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.MessageType;
@@ -99,8 +100,40 @@ public class ParsingServer {
 		}
 		case CreditCardList:{
 			String userId = (String) receivedMessage.getMessageData();
-			ArrayList<String> creditCards= Query.CreditCardList(userId);
+			ArrayList<CreditCard> creditCards= Query.CreditCardList(userId);
 			return (new Message(MessageType.CreditCardList_succ,creditCards));
+		}
+		case CreditValue:{
+			String userId = (String) receivedMessage.getMessageData();
+			int credit= Query.getCreditValue(userId);
+			return (new Message(MessageType.CreditValue_succ,credit));
+		}
+		case CreditUsed:{
+			String[] DivededUandCredit = ((String) receivedMessage.getMessageData()).split("@");
+			Query.setCreditValue(DivededUandCredit[0], DivededUandCredit[1]);
+			return (new Message(MessageType.CreditUsed_succ,""));
+		}
+		case Add_New_Payment_Method : {
+			String[] DivededUandCredit = ((String) receivedMessage.getMessageData()).split("@");
+			System.out.println(DivededUandCredit[0]+ DivededUandCredit[1]);
+			Query.AddCreditCard(DivededUandCredit[0], DivededUandCredit[1]);
+			return (new Message(MessageType.Add_New_Payment_Method_succ,""));
+		}
+		case Add_Order:{
+			String[] DivedOrderDet = ((String) receivedMessage.getMessageData()).split("@");
+			Query.AddOrderToDb(DivedOrderDet[0],DivedOrderDet[1],DivedOrderDet[2],DivedOrderDet[3],DivedOrderDet[4],
+					DivedOrderDet[5],DivedOrderDet[6],DivedOrderDet[7]);
+			return (new Message(MessageType.Add_Order_succ,""));
+		}
+		case IsNewClient:{
+			String userId = (String) receivedMessage.getMessageData();
+			int res= Query.IsNewClient(userId);
+			return (new Message(MessageType.IsNewClient_succ,res));
+		}
+		case  UpdateNewClientDiscount:{
+			String userId = (String) receivedMessage.getMessageData();
+			Query.UpdateNewClientDisc(userId);
+			return (new Message(MessageType.UpdateNewClientDiscount_succ,""));
 		}
 		default:
 			break;

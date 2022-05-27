@@ -1,11 +1,15 @@
+
 package Querys;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 import Entities.Client;
+import Entities.CreditCard;
 import Entities.Item_In_Catalog;
 import Entities.Order;
 import Entities.OrdersReport;
@@ -399,15 +403,15 @@ public class Query {
 		
 		}
 
-		public static ArrayList<String> CreditCardList(String userId) {
-			ArrayList<String> creditCards = new ArrayList<String>();
+		public static ArrayList<CreditCard> CreditCardList(String userId) {
+			ArrayList<CreditCard> creditCards = new ArrayList<CreditCard>();
 			PreparedStatement stmt;
 			try {
 				stmt = DBConnect.conn.prepareStatement("SELECT creditcardsNum FROM zerli_db.creditcards WHERE client_id = ?");
 				stmt.setString(1,userId);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					creditCards.add(rs.getString("creditcardsNum"));
+					creditCards.add(new CreditCard(rs.getString("creditcardsNum")));
 				}
 					rs.close();
 				} catch (SQLException e) {
@@ -416,10 +420,120 @@ public class Query {
 	
 		return creditCards;
 		}
+
+		public static int getCreditValue(String userId) {
+			PreparedStatement stmt;
+			int credit = 0;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT Credit FROM zerli_db.client WHERE client_id = ?");
+				stmt.setString(1,userId);
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+				  credit =rs.getInt("Credit");
+				}
+				rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+	
+		return credit;
+		}
+
+		public static void setCreditValue(String userId,String divededUandCredit) {
+			int credit =Integer.valueOf(divededUandCredit);
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.client SET Credit=? WHERE client_id = ?");
+				stmt.setInt(1,credit);
+				stmt.setString(2,userId);
+				stmt.executeUpdate();
+
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+
+		}
+
+		public static void AddCreditCard(String Userid, String CreditCardNum) {
+			System.out.println(Userid +"+"+CreditCardNum);
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("INSERT INTO zerli_db.creditcards (client_id,creditcardsNum) VALUES(?,?)");
+				stmt.setString(1,Userid);
+				stmt.setString(2,CreditCardNum);
+				stmt.executeUpdate();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			
+		}
+
+		public static void AddOrderToDb(String store, String clientId, String price, String greeting,String status, String suppMeth,
+			String suppDate, String suppTime) {
+			PreparedStatement stmt;
+            int lastorder=0;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT OrderNum From zerli_db.orders ORDER BY OrderNum DESC LIMIT 1");
+				 ResultSet rs = stmt.executeQuery();
+					while(rs.next()) {
+						lastorder =rs.getInt("OrderNum");
+						}
+		 		} catch (SQLException e) {
+		         	e.printStackTrace();
+				}   
+
+			try {
+				stmt = DBConnect.conn.prepareStatement("INSERT INTO zerli_db.orders (OrderNum,store,clientId,price,greeting,status,supplimentMethod,supplimentTime,supplimentDate,OrderTime) VALUES(?,?,?,?,?,?,?,?,?,now())");
+				stmt.setInt(1,lastorder+1);
+				stmt.setString(2,store);
+				stmt.setString(3,clientId);
+				stmt.setString(4,price);
+				stmt.setString(5,greeting);
+				stmt.setString(6,status);
+				stmt.setString(7,suppMeth);
+				stmt.setString(8,suppDate);
+				stmt.setString(9,suppTime);
+	
+				stmt.executeUpdate();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+		}
+
+		public static int IsNewClient(String userId) {
+			PreparedStatement stmt;
+			int res = 0 ;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT newClient FROM zerli_db.client WHERE client_id = ?");
+				stmt.setString(1,userId);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					res=rs.getInt("newClient");
+				}
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			return res;
+		}
+
+		public static void UpdateNewClientDisc(String userId) {
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.client SET newClient=? WHERE client_id = ?");
+				stmt.setInt(1,0);
+				stmt.setString(2,userId);
+				stmt.executeUpdate();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+		}
+			
+			
+}
 		
-		
-		
-	}
+	
 
 
 

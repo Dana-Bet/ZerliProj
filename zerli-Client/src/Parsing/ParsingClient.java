@@ -3,6 +3,7 @@ package Parsing;
 import java.util.ArrayList;
 
 import Entities.ClientCart;
+import Entities.CreditCard;
 import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.OrdersReport;
@@ -19,10 +20,11 @@ import controlers.ManagerFreezeController;
 import controlers.ManagerViewReportsOrders;
 import controlers.ManagerViewReportsRevenueController;
 import controlers.UpdateItemsInCatalogController;
+import controlers.PaymentScreenController;
 
 public class ParsingClient {
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public static void Message(Object msg) {
 		// TODO Auto-generated method stub
 		Message receivedMessage = (Message) msg;
@@ -107,8 +109,30 @@ public class ParsingClient {
 			ClientOrderPageController.storesList = stores;
 		}
 		case CreditCardList_succ :{
-		 PaymentScreenController
+			PaymentScreenController.cardList =  (ArrayList<CreditCard>) (receivedMessage.getMessageData());
+		
 		}
+		case CreditValue_succ :{
+			PaymentScreenController.CreditAmmount =receivedMessage.getMessageData() ;
+		
+		}
+		case CreditUsed_succ:{
+			
+		}
+		
+		case Add_New_Payment_Method_succ:{
+			
+		}
+		case Add_Order_succ:{
+		
+		}
+		case IsNewClient_succ:{
+			PaymentScreenController.newClient= receivedMessage.getMessageData();		
+		}
+		case UpdateNewClientDiscount_succ:{
+			
+		}
+		
 		default:{
 			break;
 		}
