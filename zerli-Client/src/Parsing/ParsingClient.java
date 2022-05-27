@@ -3,6 +3,7 @@ package Parsing;
 import java.util.ArrayList;
 
 import Entities.ClientCart;
+import Entities.Complaint;
 import Entities.CreditCard;
 import Entities.Item_In_Catalog;
 import Entities.Message;
@@ -10,6 +11,7 @@ import Entities.OrdersReport;
 import Entities.RevenueReport;
 import Entities.Store;
 import Entities.User;
+import controlers.CEOViewReportsOrdersController;
 import controlers.CartScreenController;
 import controlers.ClientAssemblyProductController;
 import controlers.ClientCatalogController;
@@ -21,6 +23,7 @@ import controlers.ManagerViewReportsOrders;
 import controlers.ManagerViewReportsRevenueController;
 import controlers.UpdateItemsInCatalogController;
 import controlers.PaymentScreenController;
+import controlers.TableComplaintsScreenController;
 
 public class ParsingClient {
 
@@ -132,7 +135,21 @@ public class ParsingClient {
 		case UpdateNewClientDiscount_succ:{
 			
 		}
-		
+		case getIdFromComplaitnDB_succ:{
+			TableComplaintsScreenController.listID = (ArrayList<String>)(receivedMessage.getMessageData());
+		}
+		case getTableComplaintsFromDB_succ:{
+			TableComplaintsScreenController.listTable = (ArrayList<Complaint>)(receivedMessage.getMessageData());
+		}
+		case getHomwStoreForCEOordersReports_succ:{
+			CEOViewReportsOrdersController.stores = (ArrayList<String>)(receivedMessage.getMessageData());
+		}
+		case getTypeProductForCEOordersReports_succ:{
+			CEOViewReportsOrdersController.types = (ArrayList<String>)(receivedMessage.getMessageData());
+		}
+		case getCEOordersReports_succ:{
+			CEOViewReportsOrdersController.reports = (ArrayList<OrdersReport>)(receivedMessage.getMessageData());
+		}
 		default:{
 			break;
 		}

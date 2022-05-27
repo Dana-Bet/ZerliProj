@@ -3,6 +3,7 @@ package Parsing;
 import java.util.ArrayList;
 
 import Entities.Client;
+import Entities.Complaint;
 import Entities.CreditCard;
 import Entities.Item_In_Catalog;
 import Entities.Message;
@@ -134,6 +135,38 @@ public class ParsingServer {
 			String userId = (String) receivedMessage.getMessageData();
 			Query.UpdateNewClientDisc(userId);
 			return (new Message(MessageType.UpdateNewClientDiscount_succ,""));
+		}
+		case getIdFromComplaitnDB:{
+			ArrayList<String> listID = (ArrayList<String>) Query.getIDFromComplaintDB();
+			return (new Message(MessageType.getIdFromComplaitnDB_succ,listID));
+		}
+		case ShowTableComlaintInDB:{
+			ArrayList<Complaint> tableComplaints = (ArrayList<Complaint>) Query.getCmplaintsTable();
+			return (new Message(MessageType.getTableComplaintsFromDB_succ,tableComplaints));
+		}
+		case setRefundToClient:{
+			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
+			Query.UpdateRefundToClient(details);
+		}
+		case GetStore:{
+			ArrayList<String> store = (ArrayList<String>)Query.getListOfStoreForCeo();
+			return (new Message(MessageType.getStore_succ,store)); 
+		}
+		case getStoresForCEOordersReports:{
+			ArrayList<String> storelist = (ArrayList<String>) Query.getListOfStoreForCeo();
+			return (new Message(MessageType.getHomwStoreForCEOordersReports_succ,storelist));
+		}
+		case getTypesForCEOordersReports:{
+			ArrayList<String> productype = (ArrayList<String>) Query.getProductTypeForCEOreportOrders();
+			return (new Message(MessageType.getTypeProductForCEOordersReports_succ,productype));
+		}
+		case getCEOordersReport:{
+			System.out.println("line 124");
+			ArrayList <String> details = (ArrayList<String>) receivedMessage.getMessageData();
+			System.out.println("line 126");
+			ArrayList<OrdersReport> typeOrders = Query.getOrdersReportForCEO(details);
+			System.out.println(typeOrders);
+			return (new Message(MessageType.getCEOordersReports_succ,typeOrders));
 		}
 		default:
 			break;
