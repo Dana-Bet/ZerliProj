@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.mainCeoScreenController">
+   <children>
+      <Label layoutX="23.0" layoutY="40.0" text="Welcome">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Text fx:id="nameText" layoutX="145.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <Button fx:id="viewOrdersBtn" layoutX="241.0" layoutY="130.0" mnemonicParsing="false" onAction="#ordersReports" prefHeight="59.0" prefWidth="239.0" text="View orders reports">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="viewRevenueBtn" layoutX="238.0" layoutY="219.0" mnemonicParsing="false" onAction="#revenueReports" prefHeight="59.0" prefWidth="239.0" text="View revenues reports">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
