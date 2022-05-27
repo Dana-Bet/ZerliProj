@@ -23,7 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
 
-//areaa
+
 public class CartScreenController extends AbstractController implements Initializable {
 	public static ClientCart cart;
 	ArrayList<LineInCartTable> l ;

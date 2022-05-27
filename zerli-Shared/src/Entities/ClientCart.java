@@ -92,6 +92,10 @@ public class ClientCart {
 			return this.NumberOfItems; 
 	      }
 	      
+	      public void setNumberOfItems() {
+			this.NumberOfItems=0; 
+	      }
+	      
 	      public Integer getQuanOfProInCart(int id) {
 	    	  List<Item_In_Catalog> ListOfSpecificProduct= this.Order_Components.get(id) ;
 	    	  if (ListOfSpecificProduct!=null) {

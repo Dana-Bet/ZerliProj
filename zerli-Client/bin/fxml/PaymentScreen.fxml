@@ -86,5 +86,10 @@
             <Font size="13.0" />
          </font>
       </Label>
+      <Label fx:id="disLabel" layoutX="318.0" layoutY="318.0" prefHeight="25.0" prefWidth="292.0" textFill="#00a42c">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

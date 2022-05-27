@@ -34,7 +34,7 @@ public class PaymentScreenController extends AbstractController implements Initi
 	private RadioButton selectedRadioButton;
 	private LocalDate exDate;
 	private Integer creditUsed = 0;
-
+	public String id = LoginScreenController.user.getId();
 
 	
     @FXML
@@ -81,7 +81,9 @@ public class PaymentScreenController extends AbstractController implements Initi
     
     @FXML
     private Label upLbl;
-
+    
+    @FXML
+    private Label disLabel;
 
 
     @FXML
@@ -114,7 +116,12 @@ public class PaymentScreenController extends AbstractController implements Initi
 			}		
 		PaymentScreenController.TotalPrice-=this.creditUsed;
 		UpdateOrderInDB();
+		if((int)newClient==1)
+		{
+			ClientUI.chat.accept(new Message(MessageType.UpdateNewClientDiscount,id));
+		}
 		CartScreenController.cart.Order_Components.clear();
+		CartScreenController.cart.setNumberOfItems();  
 		start(event, "ClientMainPage", "Main page", "");
 
     }
@@ -160,6 +167,7 @@ public class PaymentScreenController extends AbstractController implements Initi
     
     @FXML
     void exDateP(ActionEvent event) {
+		this.upLbl.setText("");
     	LocalDate now = LocalDate.now();
     	this.exDate = this.exDatePicker.getValue();
     	if (this.exDate.compareTo(now)==-1) {
@@ -209,13 +217,12 @@ public class PaymentScreenController extends AbstractController implements Initi
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		String id = LoginScreenController.user.getId();
 		PaymentScreenController.TotalPrice = ClientOrderPageController.TotalPrice;
 		ClientUI.chat.accept(new Message(MessageType.IsNewClient,id));
 		if((int)newClient==1)
 		{
+		  this.disLabel.setText("Enjoy 20% off for your first purchase!");
           PaymentScreenController.TotalPrice = (float) (TotalPrice*0.8);
-  	      ClientUI.chat.accept(new Message(MessageType.UpdateNewClientDiscount,id));
 		}	
 		ClientUI.chat.accept(new Message(MessageType.CreditValue,id));
 
