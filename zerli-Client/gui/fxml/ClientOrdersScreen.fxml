@@ -7,18 +7,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="913.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientOrdersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="880.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientOrdersController">
    <children>
-      <TableView fx:id="table" layoutX="32.0" layoutY="119.0" opacity="0.84" prefHeight="193.0" prefWidth="852.0">
+      <TableView fx:id="table" layoutX="14.0" layoutY="111.0" opacity="0.84" prefHeight="220.0" prefWidth="853.0">
          <columns>
-            <TableColumn fx:id="orderNumberCol" prefWidth="93.60000324249268" style="-fx-alignment: CENTER;" text="Order No" />
-            <TableColumn fx:id="storeCol" prefWidth="60.79998779296875" style="-fx-alignment: CENTER;" text="Store" />
-            <TableColumn fx:id="greetingCardCol" prefWidth="108.80000305175781" text="Greeting" />
-            <TableColumn fx:id="priceCol" prefWidth="110.4000244140625" text="Price" />
-            <TableColumn fx:id="DeliveryMethodCol" minWidth="0.0" prefWidth="129.0" text="Delivery method" />
-            <TableColumn fx:id="suppTimeCol" prefWidth="135.0" text="Suppliment time" />
-            <TableColumn fx:id="suppDateCol" prefWidth="126.0" text="Suppliment date" />
-            <TableColumn fx:id="OrderTimeCol" prefWidth="85.0" text="Order Time" />
+            <TableColumn fx:id="orderNumberCol" prefWidth="68.0" text="Order No" />
+            <TableColumn fx:id="storeCol" prefWidth="73.0" text="Store" />
+            <TableColumn fx:id="priceCol" prefWidth="72.0" text="Price" />
+            <TableColumn fx:id="greetingCardCol" prefWidth="98.0" text="Greeting" />
+            <TableColumn fx:id="statusCol" prefWidth="86.0" text="Status" />
+            <TableColumn fx:id="DeliveryMethodCol" minWidth="0.0" prefWidth="125.0" text="Delivery method" />
+            <TableColumn fx:id="suppTimeCol" prefWidth="120.0" text="Suppliment time" />
+            <TableColumn fx:id="suppDateCol" prefWidth="118.0" text="Suppliment date" />
+            <TableColumn fx:id="OrderTimeCol" prefWidth="92.0" text="Order Time" />
          </columns>
       </TableView>
       <Button fx:id="backBtn" layoutX="27.0" layoutY="565.0" mnemonicParsing="false" onAction="#backMainPage" prefHeight="28.0" prefWidth="123.0" style="-fx-background-radius: 30;" text="Back">
@@ -26,7 +27,7 @@
             <Font name="Yu Gothic UI Light" size="18.0" />
          </font>
       </Button>
-      <Label layoutX="593.0" layoutY="39.0" prefHeight="54.0" prefWidth="181.0" text="My Orders">
+      <Label layoutX="343.0" layoutY="30.0" prefHeight="54.0" prefWidth="181.0" text="My Orders">
          <font>
             <Font name="Yu Gothic UI Light" size="37.0" />
          </font>

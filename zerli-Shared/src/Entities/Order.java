@@ -14,7 +14,7 @@ public class Order implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int orderNumber;
-	private int price;
+	private String price;
 	private String greetingCard;
 	private String store;
     private String ClientId;
@@ -22,32 +22,34 @@ public class Order implements Serializable{
     private String status;
     
 
-	public LocalTime suppTime = null;
-	public Date suppDate = null;
-	
+	public String suppTime = null;
+	public String suppDate = null;
+	public Time orderTime=null;
+
 	public Delivery delivery =null;
 
-	public Order(int OrderNumber,int price,String greetingCard,
-			String store,String ClientId,LocalTime suppTime,Date suppDate,String suppmethod)
+
+	public Order(int OrderNumber,String store,String greetingCard,String Status,
+			String price,String suppmethod,String suppTime,String suppDate,Time OrderTime)
 	{
 		this.orderNumber = OrderNumber;
 		this.price = price;
 		this.greetingCard =greetingCard;
-		this.status = "not confirm";
+		this.status = Status;
 		this.SupplimentMethod = suppmethod;
 		this.store = store;
-		this.ClientId = ClientId;
 		this.suppDate = suppDate;
 		this.suppTime = suppTime;
-
-	
+		this.orderTime = OrderTime;
 	}
-	public Order(String greetingCard,
-			String store,String ClientId,LocalTime suppTime,Date suppDate,String suppmethod)
+	
+	
+	public Order(String greetingCard,String Status,
+			String store,String ClientId,String suppTime,String suppDate,String suppmethod)
 	{
 		
 		this.greetingCard =greetingCard;
-		this.status = "waiting for confirmation";
+		this.status = Status;
 		this.SupplimentMethod = suppmethod;
 		this.store = store;
 		this.ClientId = ClientId;
@@ -67,12 +69,12 @@ public class Order implements Serializable{
 		orderNumber = ordernumber;
 	}
 	
-	public int getPrice()
+	public String getPrice()
 	{
 		return price;
 	}
 	
-	public void setPrice(int price)
+	public void setPrice(String price)
 	{
 		this.price = price;
 	}
@@ -128,6 +130,15 @@ public class Order implements Serializable{
 		this.delivery = delivery;
 	}
 	
+	
+	public Time getOrderTime() {
+		return orderTime;
+	}
+	
+	public void setOrderTime(Time orderTime) {
+		this.orderTime = orderTime;
+	}
+		
+	}
 
 
-}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import Entities.CreditCard;
@@ -178,7 +179,7 @@ public class PaymentScreenController extends AbstractController implements Initi
     }
     
 	public static void UpdateOrderInDB() {
-
+		ClientOrderPageController.order.setOrderTime(Time.valueOf(LocalTime.now()));
     	StringBuilder str = new StringBuilder();
 		str.append(ClientOrderPageController.order.getStore());
 		str.append("@");

@@ -529,6 +529,28 @@ public class Query {
 			e.printStackTrace();
 				}
 		}
+
+		public static ArrayList<Order> get_Orders_list(String userId) 
+		{
+			ArrayList<Order> orders =new ArrayList<Order>(); 
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT * From zerli_db.orders WHERE clientId = ?");
+				stmt.setString(1,userId);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					orders.add(new Order(rs.getInt("OrderNum"),rs.getString("store"),rs.getString("greeting"),rs.getString("status"),rs.getString("price"),
+							rs.getString("supplimentMethod"),rs.getString("supplimentTime"),rs.getString("supplimentDate"),rs.getTime("OrderTime")));
+				}
+				
+				rs.close();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+
+			return orders;
+		}
 			
 			
 }

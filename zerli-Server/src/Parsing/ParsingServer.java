@@ -135,6 +135,11 @@ public class ParsingServer {
 			Query.UpdateNewClientDisc(userId);
 			return (new Message(MessageType.UpdateNewClientDiscount_succ,""));
 		}
+		case Get_All_Order_by_id :{
+			String userId = (String) receivedMessage.getMessageData();
+			return (new Message(MessageType.Get_All_Order_by_id_succ,Query.get_Orders_list(userId)));
+			
+		}
 		default:
 			break;
 		

@@ -45,6 +45,7 @@ public class ClientOrderPageController  extends AbstractController implements In
 	public Date suppDate = null;;
 
 	final int delivery_price = 10;
+	private Delivery delivery =null;
 
     @FXML
     private ChoiceBox<String> shopDropDownMenu;
@@ -108,7 +109,7 @@ public class ClientOrderPageController  extends AbstractController implements In
     	setTime();
     	if(checkAllFileds()!=1) {return;}
     	if(this.IsDelivery) {
-    		TotalPrice -=this.delivery_price;
+    		TotalPrice +=this.delivery_price;
     	}
     	createOrder();
     	start(event, "PaymentScreen", "Payment screen", "");
@@ -116,12 +117,15 @@ public class ClientOrderPageController  extends AbstractController implements In
     
 	private void createOrder() {
 		if (AddGreeting) {
-			order = new Order(greeting,choosingShop,LoginScreenController.user.getId(),this.suppTime,this.suppDate,this.DeliverM);	
+			order = new Order(greeting,"Not confirm",choosingShop,LoginScreenController.user.getId(),this.suppTime.toString(),this.suppDate.toString(),this.DeliverM);	
 	}
 		else {
-			order = new Order("without",choosingShop,LoginScreenController.user.getId(),this.suppTime,this.suppDate,this.DeliverM);	
+			order = new Order("without","Not confirm",choosingShop,LoginScreenController.user.getId(),this.suppTime.toString(),this.suppDate.toString(),this.DeliverM);	
 			}
+		if(this.DeliverM.compareTo("delivery")==0) {
+			 order.delivery = this.delivery;
 		}
+   }
 
 	@FXML
     private void getDeliveryDetails(ActionEvent event) {
@@ -228,7 +232,7 @@ public class ClientOrderPageController  extends AbstractController implements In
 				 return 0;
 			 }
 			 else {
-				 order.delivery = new Delivery(this.CityTextFiled.getText(), this.AddressTextFiled.getText(),this.ReciverPhoneText.getText(), this.ReciverNameText.getText());
+				this.delivery = new Delivery(this.CityTextFiled.getText(), this.AddressTextFiled.getText(),this.ReciverPhoneText.getText(), this.ReciverNameText.getText());
 			 }
 		 }
 		     else if (this.DeliverM==null) {

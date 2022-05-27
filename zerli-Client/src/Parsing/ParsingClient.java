@@ -6,6 +6,7 @@ import Entities.ClientCart;
 import Entities.CreditCard;
 import Entities.Item_In_Catalog;
 import Entities.Message;
+import Entities.Order;
 import Entities.OrdersReport;
 import Entities.RevenueReport;
 import Entities.Store;
@@ -14,6 +15,7 @@ import controlers.CartScreenController;
 import controlers.ClientAssemblyProductController;
 import controlers.ClientCatalogController;
 import controlers.ClientOrderPageController;
+import controlers.ClientOrdersController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
 import controlers.ManagerFreezeController;
@@ -131,6 +133,9 @@ public class ParsingClient {
 		}
 		case UpdateNewClientDiscount_succ:{
 			
+		}
+		case Get_All_Order_by_id_succ:{
+			ClientOrdersController.list = (ArrayList<Order>) receivedMessage.getMessageData();
 		}
 		
 		default:{
