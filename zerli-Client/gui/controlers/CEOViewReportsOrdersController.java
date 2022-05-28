@@ -56,7 +56,7 @@ public class CEOViewReportsOrdersController extends AbstractController implement
     @FXML
     private Button showBtn;
 
-   
+   ///mm
     public static ArrayList<String> types = new ArrayList<String>();
     public static ArrayList<String> stores = new ArrayList<String>();
     public static ArrayList<String> details = new ArrayList<String>();
